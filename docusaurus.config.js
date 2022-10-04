@@ -6,9 +6,9 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Adyeshach',
-  tagline: '虚拟实体解决方案',
-  url: 'https://github.com/taboolib/adyeshach',
+  title: 'TabooLib',
+  tagline: 'Powerful framework for creating multi-platform Minecraft plugin',
+  url: 'https://github.com/taboolib/taboolib',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -17,7 +17,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'taboolib', // Usually your GitHub org/user name.
-  projectName: 'adyeshach', // Usually your repo name.
+  projectName: 'taboolib', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -70,9 +70,9 @@ const config = {
     ({
       navbar: {
         hideOnScroll: true,
-        title: 'Adyeshach',
+        title: 'TabooLib',
         logo: {
-          src: 'img/icon Alpha.png',
+          src: 'img/icon.png',
         },
         items: [
           {
@@ -87,7 +87,7 @@ const config = {
               position: 'left'
           },
           {
-            href: 'https://github.com/taboolib/adyeshach',
+            href: 'https://github.com/taboolib/taboolib',
             label: '源代码',
             position: 'right',
           },
