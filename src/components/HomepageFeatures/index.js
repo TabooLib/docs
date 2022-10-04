@@ -4,35 +4,34 @@ import styles from './styles.module.css';
 
 const FeatureList = [
     {
-        prefix: '测试',
-        title: '专业',
-        subtitle: '测试',
+        prefix: 'EXPERIENCE',
+        title: '「沉淀」',
+        subtitle: '多年迭代 & 汰劣留良',
         description: (
             <>
-                基于 TabooLib 开发，Adyeshach 并非传统意义的 NPC 插件，而是一种虚拟实体的解决方案。
-                任何人都可以免费使用 Adyeshach。
+                自 TabooLib 诞生以来，从最初的私有库到如今由社区共同维护，经历了无数个版本的迭代，我们清楚大家的需求。
             </>
         ),
     },
     {
-        prefix: '测试',
-        title: '友好',
-        subtitle: '测试',
+        prefix: 'FRIENDLY',
+        title: '「友好」',
+        subtitle: '开箱即用 & 拒绝繁琐',
         description: (
             <>
-                得益于强大的游戏内编辑器，Adyeshach (2.0) 可以友好且快速的控制所有虚拟实体，包括由其他
-                插件创造的。
+                基于 <a href="https://tabooproject.org/quickstart.html">QuickStart</a> 工具，创建项目仅需 30 秒
+                <br></br>在 TabooLib 中，任何工具的设计初衷都是为了能够更便捷的使用。
             </>
         ),
     },
     {
-        prefix: '测试',
-        title: '改变',
-        subtitle: '测试',
+        prefix: 'LIBERAL',
+        title: '「开放」',
+        subtitle: '宽松协议 & 自由创作',
         description: (
             <>
-                得益于强大的游戏内编辑器，Adyeshach (2.0) 可以友好且快速的控制所有虚拟实体，包括由其他
-                插件创造的。
+                我们使用 <a href="https://github.com/TabooLib/taboolib/blob/master/LICENSE">MIT License</a> 协议开源
+                <br></br>无论它是何种形态 🥵
             </>
         ),
     },

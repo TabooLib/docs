@@ -58,11 +58,15 @@
 }
 
 .font-light {
-  color: var(--ifm-color-primary-light);
+  color: var(--ifm-color-primary-lightest);
 }
 
 .font-dark {
   color: var(--ifm-color-primary-dark);
+}
+
+.navbar__title {
+  color: var(--ifm-color-primary);
 }
 
 article {

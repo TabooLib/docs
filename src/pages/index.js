@@ -15,7 +15,7 @@ function HomepageHeader() {
         {/*  标题 */}
         <h1 className="hero__title">{siteConfig.title}</h1>
         {/*  副标题 */}
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">Minecraft (Java 版) 跨平台 <b><u>Kotlin</u></b> 插件开发框架</p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"

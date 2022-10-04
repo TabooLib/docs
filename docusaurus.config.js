@@ -7,7 +7,6 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'TabooLib',
-  tagline: 'Powerful framework for creating multi-platform Minecraft plugin',
   url: 'https://github.com/taboolib/taboolib',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -85,6 +84,11 @@ const config = {
               to: '/blog', 
               label: '灵感', 
               position: 'left'
+          },
+          {
+            href: 'https://tabooproject.org/quickstart.html',
+            label: '快速开始',
+            position: 'right',
           },
           {
             href: 'https://github.com/taboolib/taboolib',
