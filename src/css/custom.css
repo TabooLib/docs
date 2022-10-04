@@ -1,0 +1,71 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #5f3694;
+  --ifm-color-primary-dark: #563185;
+  --ifm-color-primary-darker: #512e7e;
+  --ifm-color-primary-darkest: #432668;
+  --ifm-color-primary-light: #693ba3;
+  --ifm-color-primary-lighter: #6d3eaa;
+  --ifm-color-primary-lightest: #7c4abd;
+  --ifm-code-font-size: 95%;
+  --ifm-font-size-base: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #ed719e;
+  --ifm-color-primary-dark: #e95289;
+  --ifm-color-primary-darker: #e7427e;
+  --ifm-color-primary-darkest: #d91c60;
+  --ifm-color-primary-light: #f190b3;
+  --ifm-color-primary-lighter: #f3a0be;
+  --ifm-color-primary-lightest: #f9cede;
+  --ifm-code-font-size: 95%;
+  --ifm-font-size-base: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.theme-doc-sidebar-menu {
+  padding: 12px;
+}
+
+.navbar {
+  height: 65px;
+}
+
+.hero__title {
+  font-size: 5rem;
+  color: white;
+}
+
+.hero__subtitle {
+  color: white;
+}
+
+.sidebar_re4s {
+  padding-left: 1rem;
+}
+
+.sidebarItemTitle_pO2u {
+  color: var(--ifm-color-primary);
+}
+
+.font-light {
+  color: var(--ifm-color-primary-light);
+}
+
+.font-dark {
+  color: var(--ifm-color-primary-dark);
+}
+
+article {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
