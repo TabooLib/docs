@@ -9,7 +9,7 @@ const FeatureList = [
         subtitle: '多年迭代 & 汰劣留良',
         description: (
             <>
-                自 TabooLib 诞生以来，从最初的私有库到如今由社区共同维护，经历了无数个版本的迭代，我们清楚大家的需求。
+                自 TabooLib 诞生以来，从最初的私有库到如今由社区共同维护，经历了无数个版本的迭代。我们最清楚大家的需求。
             </>
         ),
     },
@@ -31,7 +31,7 @@ const FeatureList = [
         description: (
             <>
                 我们使用 <a href="https://github.com/TabooLib/taboolib/blob/master/LICENSE">MIT License</a> 协议开源
-                <br></br>无论它是何种形态 🥵
+                <br></br>任何人都可以自由使用、修改、分发或将其用于商业项目，而不受任何限制。
             </>
         ),
     },

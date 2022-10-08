@@ -2,46 +2,46 @@
 sidebar_position: 1
 ---
 
-# 介绍
+# 前言
 
-Let's discover **Docusaurus in less than 5 minutes**.
+欢迎来到 TabooLib Docs。
 
-## 快速开始
+这里定义了基于 [TabooLib](https://github.com/taboolib/taboolib) `6.0` 编写 Minecraft 插件而提供的指导性准则和建议。
 
-Get started by **creating a new site**.
+TabooLib 是基于多种 Minecraft 服务端平台的插件开发框架，你可以在 **原生** 的 Bukkit 平台运行基于该插件，同时也可以在 BungeeCord、Nukkit 等平台运行。
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+TabooLib 基于 **依赖打包** 的模式运行，开发者可根据需求自行安装所需模块。
 
-### What you'll need
+:::tip
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+你可以在 [这里](https://tabooproject.org) 查看版本信息并通过 [QuickStart](https://tabooproject.org/quickstart.html) 快速开始。
 
-## Generate a new site
+:::
 
-Generate a new Docusaurus site using the **classic template**.
+:::tip
 
-The classic template will automatically be added to your project after you run the command:
+在插件启动时，TabooLib 将从 **阿里云中央仓库** 自动下载模块所需的运行库。例如 Kotlin。
 
-```bash
-npm init docusaurus@latest my-website classic
+:::
+
+## 版本信息
+
+| 构建版本                                                                                                                                                               | 发行时间                                                                                                                                                              | 插件版本                                                                                                                                                                            |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![](https://img.shields.io/badge/dynamic/json?label=Version&query=%24.tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2FTabooLib%2FTabooLib%2Freleases%2Flatest) | ![](https://img.shields.io/badge/dynamic/json?label=Date&query=%24.created_at&url=https%3A%2F%2Fapi.github.com%2Frepos%2FTabooLib%2FTabooLib%2Freleases%2Flatest) | ![](https://img.shields.io/badge/dynamic/json?label=Plugin&query=%24.tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2FTabooLib%2Ftaboolib-gradle-plugin%2Freleases%2Flatest) |
+
+```kotlin title="build.gradle.kts" showLineNumbers
+plugins {
+    id("io.izzel.taboolib") version "插件版本"
+}
+
+taboolib {
+    version = "构建版本"
+}
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+:::warning
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+你可以使用旧版本的 TabooLib 来开发插件，但我们始终建议你更新到最新稳定版本。
 
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+:::
