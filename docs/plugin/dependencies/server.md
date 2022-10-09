@@ -14,9 +14,12 @@ sidebar_position: 1
 
 ## Bukkit
 
-Bukkit 核心文件的格式为 `ink.ptms.core:v[版本]:[版本]` 或 `ink.ptms.core:v[版本]:[版本]:[子类型]`。
+Bukkit 核心文件的格式为:
 
-**常见版本如下所示:**
+- `ink.ptms.core:v[版本]:[版本]`
+- `ink.ptms.core:v[版本]:[版本]:[子类型]`
+
+### 版本列表
 
 | 版本     | 版本                              | 说明   |
 |--------|---------------------------------|------|
@@ -48,7 +51,7 @@ Bukkit 核心文件的格式为 `ink.ptms.core:v[版本]:[版本]` 或 `ink.ptms
 | 1.19.2 | `ink.ptms.core:v11902`          | 无    |
 | 1.19.2 | `ink.ptms.core:v11902-minimize` | 压缩版本 |
 
-压缩版本是用于网络不好的地区或 **Github Actions** 下的解决方案，该版本无法进行 **反编译**。
+压缩版本是用于网络较差的地区或 **Github Actions** 下的解决方案，无法进行反编译。
 
 :::danger
 
@@ -60,7 +63,7 @@ Bukkit 核心文件的格式为 `ink.ptms.core:v[版本]:[版本]` 或 `ink.ptms
 
 #### 1.8
 
-```kotlin
+```kotlin title="build.gradle.kts"
 dependencies {
     compileOnly("ink.ptms.core:v10800:10800")
 }
@@ -68,7 +71,7 @@ dependencies {
 
 #### 1.12
 
-```kotlin
+```kotlin title="build.gradle.kts"
 dependencies {
     compileOnly("ink.ptms.core:v11200:11200")
 }
@@ -76,7 +79,7 @@ dependencies {
 
 #### 1.18
 
-```kotlin
+```kotlin title="build.gradle.kts"
 dependencies {
     compileOnly("ink.ptms.core:v11800:11800:universal")
     compileOnly("ink.ptms.core:v11800:11800:mapped")
@@ -85,11 +88,11 @@ dependencies {
 
 在不进行 **NMS** 开发的情况下，二者只需使用一个。
 
-## Bukkit NMS-ALL
+## Bukkit (NMS)
 
 TabooLib 提供了一个集成 `1.8` 到 `1.16` 之间所有版本的 **NMS** 包的核心文件。
 
-```kotlin
+```kotlin title="build.gradle.kts"
 dependencies {
     compileOnly("ink.ptms:nms-all:1.0.0")
 }
@@ -101,7 +104,7 @@ dependencies {
 
 BungeeCord 核心，没啥好说的。
 
-```kotlin
+```kotlin title="build.gradle.kts"
 dependencies {
     compileOnly("net.md_5.bungee:BungeeCord:1")
 }

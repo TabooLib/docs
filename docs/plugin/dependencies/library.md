@@ -32,4 +32,22 @@ taboolib {
 
 ## 动态加载
 
-...
+动态加载基于 `RuntimeDependency`，可以在插件运行时动态加载第三方库。
+
+```kotlin
+@RuntimeDependency(
+    value = "com.google.code.gson:gson:2.8.7", 
+    test = "com.google.gson.JsonElement"
+)
+class RuntimeEnv
+```
+
+在插件运行时，如果 `test` 指定的类不存在，则会自动加载 `value` 指定的第三方库。
+
+:::tip
+
+默认通过 **阿里云中央仓库** 下载，也可使用 `repository` 指定其他仓库。
+
+:::
+
+在后面的章节中，我们会对 `RuntimeDependency` 进行详细介绍。

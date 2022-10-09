@@ -22,9 +22,9 @@ Kotlin 或 Kotlinx 相关库在 TabooLib 项目中有特殊的运行逻辑，前
 
 ## Serialization
 
-:::tip
+:::caution
 
-截至目前，TabooLib 基于 Kotlin `1.5.31` 版本开发，不支持 `1.4.0` 以上版本的 `Serialization`。
+截至目前，TabooLib 不支持 `1.4.0` 以上版本的 `Serialization`。
 
 :::
 

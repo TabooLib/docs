@@ -40,7 +40,7 @@ taboolib {
 }
 ```
 
-:::warning
+:::caution
 
 你可以使用旧版本的 TabooLib 来开发插件，但我们始终建议你更新到最新稳定版本。
 
