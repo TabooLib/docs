@@ -1,6 +1,5 @@
 ---
 sidebar_position: 1
-title: 创建项目
 ---
 
 # 创建项目
@@ -20,7 +19,16 @@ TabooLib 提供了一个快速开始的项目模板，你可以通过 [QuickStar
 你也可以通过 [TabooLib-SDK](https://github.com/taboolib/taboolib-sdk) 项目来创建项目。
 
 ```bash
-git clone --depth=1 https://github.com/taboolib/taboolib-sdk
+git clone --depth=1 https://github.com/taboolib/taboolib-sdk MyProject
+```
+
+```bash
+Cloning into 'MyProject'...
+remote: Enumerating objects: 25, done.
+remote: Counting objects: 100% (25/25), done.
+remote: Compressing objects: 100% (13/13), done.
+remote: Total 25 (delta 0), reused 17 (delta 0), pack-reused 0
+Receiving objects: 100% (25/25), 57.78 KiB | 365.00 KiB/s, done.
 ```
 
 :::caution
