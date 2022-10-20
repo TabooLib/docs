@@ -34,7 +34,7 @@ taboolib {
     install("platform-bukkit")
     classifier = null
     // 当前 TabooLib 版本
-    version = "6.0.9-114"
+    version = "6.0.9-125"
 }
 ```
 
