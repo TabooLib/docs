@@ -1,0 +1,26 @@
+---
+sidebar_position: 2
+---
+
+# kether
+
+内建脚本（动作语句）解决方案
+
+:::tip
+
+该模块为半跨平台模块：部分语句仅支持 Bukkit 平台
+
+:::
+
+**依赖**
+
+- `common`
+- `common-5`
+- `module-configuration` 或 `module-configuration-legacy`
+
+**软依赖**
+
+- `module-lang`: 语言文件支持
+- `module-chat`: 颜色支持
+- `module-nms`: 记分板语句
+- `module-nms-util`: 记分板语句

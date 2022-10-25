@@ -1,0 +1,17 @@
+---
+sidebar_position: 2
+---
+
+# chat
+
+Raw 信息构建工具与 1.16 RGB 颜色转换
+
+:::tip
+
+该模块为半跨平台模块：可脱离 Minecraft 运行，但无实际意义
+
+:::
+
+**依赖**
+
+- `common`
