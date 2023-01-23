@@ -76,7 +76,7 @@ Raw 信息构建工具与 1.16 RGB 颜色转换
 
 - `module-chat`: 颜色支持
 
-### <span style={{color: "darkred"}}><s>module-configuration-legacy</s></span>
+### module-configuration-legacy
 
 Bukkit Yaml 封装接口与配置文件管理工具（老版本，6.0.3 以前)
 
@@ -113,7 +113,7 @@ Bukkit Yaml 封装接口与配置文件管理工具（老版本，6.0.3 以前)
 
 - `module-configuration` 或 `module-configuration-legacy`: 从配置文件加载连接信息
 
-### <span style={{color: "darkred"}}><s>module-database-mongodb</s></span>
+### module-database-mongodb
 
 数据库管理工具（MongoDB）
 
@@ -236,7 +236,7 @@ BungeeCord 通讯工具
 
 - `common`
 
-### <span style={{color: "darkred"}}><s>module-ui-receptacle</s></span>
+### module-ui-receptacle
 
 箱子菜单构建工具（发包实现）
 
