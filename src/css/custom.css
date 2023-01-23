@@ -33,47 +33,59 @@
 }
 
 .theme-doc-sidebar-menu {
-  padding: 12px;
+    padding: 12px;
 }
 
 .navbar {
-  height: 65px;
+    height: 65px;
 }
 
 .hero__title {
-  font-size: 5rem;
-  color: white;
+    font-size: 5rem;
+    color: white;
 }
 
 .hero__subtitle {
-  color: white;
+    color: white;
 }
 
 .sidebar_re4s {
-  padding-left: 1rem;
+    padding-left: 1rem;
 }
 
 .sidebarItemTitle_pO2u {
-  color: var(--ifm-color-primary);
+    color: var(--ifm-color-primary);
 }
 
 .font-light {
-  color: var(--ifm-color-primary-lightest);
+    color: var(--ifm-color-primary-lightest);
 }
 
 .font-dark {
-  color: var(--ifm-color-primary-dark);
+    color: var(--ifm-color-primary-dark);
 }
 
 .navbar__title {
-  color: var(--ifm-color-primary);
+    color: var(--ifm-color-primary);
+}
+
+.navbar__title {
+    padding-left: 1rem;
+}
+
+.navbar__brand {
+    padding-left: 1rem;
+}
+
+.navbar__item {
+    padding-right: 1rem;
 }
 
 h1 {
-  padding-top: 0.5rem;
+    padding-top: 0.5rem;
 }
 
 .container {
-  padding-left: 2rem;
-  padding-right: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
