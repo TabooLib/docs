@@ -50,6 +50,8 @@ Bukkit 核心文件的格式为:
 | 1.19.1 | `ink.ptms.core:v11901-minimize` | 压缩版本 |
 | 1.19.2 | `ink.ptms.core:v11902`          | 无    |
 | 1.19.2 | `ink.ptms.core:v11902-minimize` | 压缩版本 |
+| 1.19.3 | `ink.ptms.core:v11903`          | 无    |
+| 1.19.3 | `ink.ptms.core:v11903-minimize` | 压缩版本 |
 
 压缩版本是用于网络较差的地区或 **Github Actions** 下的解决方案，无法进行反编译。
 
