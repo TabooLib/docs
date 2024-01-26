@@ -4,40 +4,152 @@
  * work well for content-centric websites.
  */
 
+@font-face {
+    font-family: Ark-Pixel-12-proportional-zh_cn;
+    src: url('/static/fonts/ark-pixel-12px-proportional-zh_cn.woff2');
+}
+
+@font-face {
+    font-family: Ark-Pixel-10-proportional-zh_cn;
+    src: url('/static/fonts/ark-pixel-10px-proportional-zh_cn.woff2');
+}
+
+body {
+    --header-height: 4rem;
+    font-family: Ark-Pixel-12-proportional-zh_cn, sans-serif;
+}
+
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #0056d6;
-  --ifm-color-primary-dark: #004dc1;
-  --ifm-color-primary-darker: #0049b6;
-  --ifm-color-primary-darkest: #003c96;
-  --ifm-color-primary-light: #005feb;
-  --ifm-color-primary-lighter: #0063f6;
-  --ifm-color-primary-lightest: #1774ff;
-  --ifm-code-font-size: 95%;
-  --ifm-font-size-base: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+    --border: hsl(214.3 31.8% 91.4%);
+    --background: 0 0% 100%;
+    --muted: hsl(210 40% 96.1%);
+    --ifm-color-primary: hsl(221.2 83.2% 53.3%);
+    --ifm-color-primary-dark: hsl(221.2 83.2% 43.3%);
+    --ifm-color-primary-darker: hsl(221.2 83.2% 33.3%);
+    --ifm-color-primary-darkest: hsl(221.2 83.2% 23.3%);
+    --ifm-color-primary-light: hsl(221.2 83.2% 63.3%);
+    --ifm-color-primary-lighter: hsl(221.2 83.2% 73.3%);
+    --ifm-color-primary-lightest: hsl(221.2 83.2% 83.3%);
+    --ifm-code-font-size: 95%;
+    --ifm-font-size-base: 95%;
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #53d5fd;
-  --ifm-color-primary-dark: #32cdfd;
-  --ifm-color-primary-darker: #21c9fc;
-  --ifm-color-primary-darkest: #03b2e8;
-  --ifm-color-primary-light: #74ddfd;
-  --ifm-color-primary-lighter: #85e1fe;
-  --ifm-color-primary-lightest: #b7edfe;
-  --ifm-code-font-size: 95%;
-  --ifm-font-size-base: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+    --border: hsl(217.2 32.6% 17.5%);
+    --background: hsl(222.2 84% 4.9%);
+    --muted: hsl(217.2 32.6% 17.5%);
+    --ifm-color-primary: hsl(217.2 91.2% 59.8%);
+    --ifm-color-primary-dark: hsl(217.2 91.2% 49.8%);
+    --ifm-color-primary-darker: hsl(217.2 91.2% 39.8%);
+    --ifm-color-primary-darkest: hsl(217.2 91.2% 29.8%);
+    --ifm-color-primary-light: hsl(217.2 91.2% 69.8%);
+    --ifm-color-primary-lighter: hsl(217.2 91.2% 79.8%);
+    --ifm-color-primary-lightest: hsl(217.2 91.2% 89.8%);
+    --ifm-code-font-size: 95%;
+    --ifm-font-size-base: 95%;
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
 .theme-doc-sidebar-menu {
     padding: 12px;
 }
 
+.navbar-sidebar, .navbar-sidebar__backdrop {
+    height: 100vh;
+}
+
 .navbar {
-    height: 65px;
+    border-color: var(--border);
+    border-bottom-width: 1px;
+    background-color: hsl(var(--background) / 0.75);
+    backdrop-filter: blur(8px);
+}
+
+nav {
+    padding: 0 !important;
+}
+
+.navbar__inner {
+    display: flex;
+    flex-wrap: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    height: 4rem;
+    max-width: 80rem;
+    gap: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.navbar .links {
+    width: 100%;
+    justify-content: center;
+    display: none;
+    align-items: center;
+    column-gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .links li a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.navbar .links li {
+    list-style: none;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    transition: color 0.2s ease-in-out;
+}
+
+.navbar .links li:hover {
+    color: var(--ifm-color-primary);
+}
+
+@media (min-width: 640px) {
+    .navbar:first-child {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+.navbar__items {
+    height: 100%;
+}
+
+.breadcrumbs__link {
+    border-radius: 8px;
+}
+
+@media (min-width: 1024px) {
+
+    .navbar__items--right {
+        flex: 1 1 0;
+    }
+
+    .navbar__brand__wrapper {
+        flex: 1 1 0;
+    }
+
+    .navbar .links {
+        display: flex;
+    }
+
+    .navbar {
+        border-width: 0;
+        margin-bottom: 0;
+    }
+
+    .navbar:first-child {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
 }
 
 .hero__title {
@@ -73,8 +185,84 @@
     padding-left: 1rem;
 }
 
+.navbar__brand__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.navbar__brand__wrapper a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
 .navbar__brand {
-    padding-left: 1rem;
+    display: flex;
+    font-family: Ark-Pixel-10-proportional-zh_cn, sans-serif;
+    border-radius: calc(0.5rem - 2px);
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    color: var(--ifm-color-primary);
+    cursor: pointer;
+}
+
+.navbar__brand:hover {
+    background-color: var(--muted);
+}
+
+.navbar__brand .light {
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.flex {
+    display: flex;
+}
+
+.navbar__action__item {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: inherit;
+}
+
+.navbar__action__item svg {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+.navbar__action__item:hover {
+    background-color: var(--muted);
+    color: inherit;
+}
+
+.navbar__search-input {
+    border-radius: 8px;
+}
+
+.navbar__items--right {
+    gap: 0.25rem;
+}
+
+.navbar__items--right .actions {
+    display: flex;
+    gap: 0.25rem;
+}
+
+li[aria-current='page'] {
+    color: var(--ifm-color-primary);
 }
 
 .navbar__item {
@@ -82,6 +270,7 @@
 }
 
 h1 {
+    font-family: Ark-Pixel-12-proportional-zh_cn, sans-serif;
     padding-top: 0.5rem;
 }
 

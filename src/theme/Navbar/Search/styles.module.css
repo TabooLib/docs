@@ -1,0 +1,34 @@
+/*
+Workaround to avoid rendering empty search container
+See https://github.com/facebook/docusaurus/pull/9385
+*/
+/*
+TODO temporary @supports check, remove before 2025
+only needed for Firefox < 121
+see https://github.com/facebook/docusaurus/issues/9527#issuecomment-1805272379
+ */
+@supports selector(:has(*)) {
+    .navbarSearchContainer:not(:has(> *)) {
+        display: none;
+    }
+}
+
+.navbarSearchContainer input {
+    height: 2rem;
+    max-width: 10rem;
+}
+
+@media (max-width: 576px) {
+    .navbarSearchContainer input {
+        cursor: pointer;
+        background-color: transparent;
+    }
+
+    .navbarSearchContainer input:focus {
+        cursor: text;
+    }
+
+    .navbarSearchContainer input:hover {
+        background-color: var(--muted);
+    }
+}
