@@ -33,7 +33,7 @@ const config = {
         [
             require.resolve("@easyops-cn/docusaurus-search-local"),
             {
-                indexPages: true,
+                indexPages: false,
                 hashed: true,
                 language: ["en", "zh"],
                 highlightSearchTermsOnTargetPage: true,
@@ -48,12 +48,9 @@ const config = {
             ({
                 docs: {
                     sidebarPath: require.resolve('./sidebars.js'),
+                    routeBasePath: "/",
                 },
-                blog: {
-                    blogTitle: '灵感',
-                    blogSidebarTitle: '全部灵感',
-                    showReadingTime: true,
-                },
+                blog: false,
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
                 },
