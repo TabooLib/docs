@@ -11,7 +11,6 @@ import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
 import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
 import styles from './styles.module.css';
-import clsx from "clsx";
 
 function useNavbarItems() {
     // TODO temporary casting until ThemeConfig type is improved
@@ -19,11 +18,14 @@ function useNavbarItems() {
 }
 
 function NavbarItems({items}) {
+    const disabledItems = ["快速开始", "组件市场", "优秀案例"];
     return (
         <ul className="links">
-            {items.map((items) => (
-                <li key={items.label} aria-current={items.label === '开发文档' ? 'page' : undefined}>
-                    <a href={items.href}>{items.label}</a>
+            {items.map((item) => (
+                <li key={item.label} aria-current={item.label === '开发文档' ? 'page' : undefined}>
+                    <button className="none-button" disabled={disabledItems.includes(item.label)}>
+                        <a href={item.href}>{item.label}</a>
+                    </button>
                 </li>
             ))}
         </ul>
