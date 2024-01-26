@@ -40,7 +40,7 @@ taboolib {
 
 ### 模块
 
-作为 TabooLib 的核心内容，在 [模块列表](/docs/plugin/modules) 中了解模块之间的关系。
+作为 TabooLib 的核心内容，在 [模块列表](/plugin/modules) 中了解模块之间的关系。
 
 :::tip
 
