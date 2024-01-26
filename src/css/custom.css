@@ -99,10 +99,9 @@ nav {
   padding: 0;
 }
 
-.navbar button {
+.navbar li button {
   border: none;
   cursor: pointer;
-  -webkit-appearance: button;
   background-color: transparent;
   background-image: none;
   text-transform: none;
