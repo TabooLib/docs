@@ -14,6 +14,10 @@
     src: url('/static/fonts/ark-pixel-10px-proportional-zh_cn.woff2');
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: Ark-Pixel-12-proportional-zh_cn, sans-serif;
+}
+
 body {
     --header-height: 4rem;
     font-family: Ark-Pixel-12-proportional-zh_cn, sans-serif;
