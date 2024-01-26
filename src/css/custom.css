@@ -230,7 +230,6 @@ nav {
 
 .navbar__brand {
   display: flex;
-  font-family: Ark-Pixel-10-proportional-zh_cn, sans-serif;
   border-radius: calc(0.5rem - 2px);
   align-items: center;
   padding: 0.25rem 0.5rem;
