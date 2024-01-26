@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
-# 配置项目
+# 配置项目 (v6.0)
 
 :::warning
 
