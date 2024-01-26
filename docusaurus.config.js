@@ -1,13 +1,12 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const { themes } = require('prism-react-renderer');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'TabooLib',
-  url: 'https://github.com/taboolib/taboolib',
+  url: 'https://tabooproject.org',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -86,7 +85,7 @@ const config = {
               position: 'left'
           },
           {
-            href: 'https://tabooproject.org/quickstart.html',
+            href: 'https://tabooproject.org/quickstart',
             label: '快速开始',
             position: 'right',
           },
@@ -101,8 +100,8 @@ const config = {
         copyright: `Copyright © 2015 ~ ${new Date().getFullYear()} <b>TABOO-PROJECT</b> All Rights Reserved.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: themes.github,
+        darkTheme: themes.dracula,
         additionalLanguages: ['java', 'kotlin', 'groovy', 'properties'],
       },
     }),
