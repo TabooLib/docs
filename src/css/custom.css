@@ -78,7 +78,7 @@ nav {
 
 .navbar__inner {
     display: flex;
-    flex-wrap: inherit;
+    justify-content: space-between;
     margin-left: auto;
     margin-right: auto;
     align-items: center;
@@ -90,9 +90,8 @@ nav {
 }
 
 .navbar .links {
-    width: 100%;
-    justify-content: center;
     display: none;
+    justify-content: center;
     align-items: center;
     column-gap: 2rem;
     margin: 0;
