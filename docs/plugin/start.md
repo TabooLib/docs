@@ -6,14 +6,6 @@ sidebar_position: 1
 
 本章内容介绍如何创建 TabooLib 项目。
 
-## 从 QuickStart 开始
-
-TabooLib 提供了一个快速开始的项目模板，你可以通过 [QuickStart](https://tabooproject.org/quickstart.html) 页面下载。
-
-![](img/start.png)
-
-选择需要的模块及运行平台，随后点击 **生成** 按钮，下载完成后解压到你的项目目录。
-
 ## 从 TabooLib-SDK 开始
 
 你也可以通过 [TabooLib-SDK](https://github.com/taboolib/taboolib-sdk) 项目来创建项目。

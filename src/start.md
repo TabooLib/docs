@@ -7,23 +7,9 @@ slug: /
 
 欢迎来到 TabooLib Docs。
 
-这里定义了基于 [TabooLib](https://github.com/taboolib/taboolib) `6.0` 编写 Minecraft 插件而提供的指导性准则和建议。
+这里定义了基于 [TabooLib](https://github.com/taboolib/taboolib) `6.1` 编写 Minecraft 插件而提供的指导性准则和建议。
 
-TabooLib 是基于多种 Minecraft 服务端平台的插件开发框架，你可以在 **原生** 的 Bukkit 平台运行基于该插件，同时也可以在 BungeeCord、Nukkit 等平台运行。
-
-TabooLib 基于 **依赖打包** 的模式运行，开发者可根据需求自行安装所需模块。
-
-:::tip
-
-你可以在 [这里](https://tabooproject.org) 查看版本信息并通过 [QuickStart](https://tabooproject.org/quickstart.html) 快速开始。
-
-:::
-
-:::tip
-
-在插件启动时，TabooLib 将从 **阿里云中央仓库** 自动下载模块所需的运行库。例如 Kotlin。
-
-:::
+TabooLib 是基于多种 Minecraft 服务端平台的插件开发框架，你可以在 **原生** 的 Bukkit 平台运行基于该插件，同时也可以在 BungeeCord、Velocity 等平台运行。
 
 ## 版本信息
 
@@ -37,7 +23,7 @@ plugins {
 }
 
 taboolib {
-    version = "构建版本"
+    version { taboolib = "构建版本" }
 }
 ```
 
