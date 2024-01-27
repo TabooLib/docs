@@ -5,6 +5,12 @@ title: 5.X
 
 # TabooLib 5
 
+:::caution
+
+此版本已停止维护。
+
+:::
+
 TabooLib `5` 是基于 Bukkit 开发的动态加载的非插件类库，由依赖插件联网下载到服务端中，每个服务端只会同时运行一个版本的 TabooLib `5`。
 
 现已停止更新，最高支持到 Minecraft `1.16.5`。
