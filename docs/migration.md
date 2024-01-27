@@ -1,6 +1,6 @@
 ---
 sidebar_position: 999
-slug: /
+slug: /migration
 ---
 
 # 版本迁移❗️
