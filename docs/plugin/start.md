@@ -63,4 +63,4 @@ gradlew build taboolibBuildApi
 gradlew build taboolibBuildApi -PDeleteCode
 ```
 
-> 参数 -[PDeleteCode]() 表示移除所有逻辑代码以减少体积。
+> 参数 `PDeleteCode` 表示移除所有逻辑代码以减少体积。
