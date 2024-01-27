@@ -27,7 +27,7 @@ slug: /migration
 
 ```kotlin title="build.gradle.kts"
 plugins {
-    id("io.izzel.taboolib") version "2.0.1" // 最低要求
+    id("io.izzel.taboolib") version "2.0.2" // 最低要求
 }
 ```
 
