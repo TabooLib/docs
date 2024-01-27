@@ -24,6 +24,18 @@ sidebar_position: 0
 
 ---
 
+## 聚合模块
+
+聚合模块是指包含了多个模块的别名，用于快速引用。
+
+| 模块名称                | 包含模块                                                        |
+|---------------------|-------------------------------------------------------------|
+| `UNIVERAL`          | `CHAT`, `CONFIGURATION`, `LANG`, `EXPANSION_COMMAND_HELPER` |
+| `UNIVERSAL_DATABAE` | `DATABASE`, `EXPANSION_PTC_OBJECT`                          |
+| `BUKKIT_ALL`        | `BUKKIT`, `BUKKIT_HOOK`, `BUKKIT_UTIL`, `BUKKIT_XSERIES`    |
+
+---
+
 ## 标准模块
 
 ### AI🚰
