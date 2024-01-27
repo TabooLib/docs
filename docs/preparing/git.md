@@ -18,13 +18,13 @@ Git 是一个开源的版本控制系统，它极大的方便了开发人员间�
 
 [GitHub Desktop](https://desktop.github.com/) 是一种在 macOS 上简便地安装 Git 的方式。
 
-如果你使用 [Homebrew](https://brew.sh/)，你可以通过以下命令安装：
+如果你使用 [Homebrew](https://brew.sh/)，你可以通过以下命令安装: 
 
 ```bash
 brew install git
 ```
 
-如果你使用 [MacPorts](https://www.macports.org/)，你可以通过以下命令安装：
+如果你使用 [MacPorts](https://www.macports.org/)，你可以通过以下命令安装: 
 
 ```bash
 port install git

@@ -6,346 +6,225 @@ sidebar_position: 0
 
 本章节将介绍 TabooLib 的模块列表，以及模块之间的依赖关系。
 
-## 核心模块
-
-### common
-
-TabooLib 的核心部分，环境部署以及跨平台接口
-
 :::tip
 
-任何 TabooLib 插件都需要安装此模块
+引用这些模块时，别忘记添加 `import io.izzel.taboolib.gradle.*`
 
 :::
 
-### common-5
+## 标准库
 
-TabooLib 5.0 版本保留下来的一些工具
+在 `6.1` 版本中，标准库是默认引用的，包含了:
 
-:::tip
++ `COMMON`：TabooLib 加载器，打包进入插件
++ `COMMON-LEGACY-API`：继承自 `5.x` 版本的旧工具
++ `COMMON-PLATFORM-API`：跨平台接口
++ `COMMON_REFLEX`：反射工具
++ `COMMON_UTILS`：核心工具
 
-该模块为跨平台模块
-
-:::
-
-**依赖**
-
-- `common`
+---
 
 ## 标准模块
 
-### module-ai🚰
+### AI🚰
 
-管理与注册自定义实体 AI（Pathfinder）
+管理与注册自定义实体 AI（Pathfinder）。
 
-**依赖**
+**依赖**: `NMS`
 
-- `common`
-- `module-nms`
+---
 
-### module-chat
+### BUKKIT_HOOK🚰
 
-Raw 信息构建工具与 1.16 RGB 颜色转换
+Bukkit 第三方插件支持，例如 `Placeholder`, `Vault` 等。
 
-:::tip
+---
 
-该模块为半跨平台模块：可脱离 Minecraft 运行，但无实际意义
+### BUKKIT_UTIL🚰
 
-:::
+Bukkit 拓展工具。
 
-**依赖**
+**软依赖**: `BUKKIT_XSERIES` (物品构造器)
 
-- `common`
+---
 
-### module-configuration
+### BUKKIT_XSERIES🚰
+
+Bukkit XSeries 支持。
+
+**软依赖**: `CHAT` (读取物品), `CONFIGURATION` (读取物品)
+
+---
+
+### CHAT
+
+Raw 信息构建工具与 1.16 RGB 颜色转换。
+
+---
+
+### CONFIGURATION
 
 配置文件解决方案（Yaml & Toml & Hocon & Json)
 
-:::tip
+**软依赖**: `CHAT` (颜色支持)
 
-该模块为跨平台模块
+---
 
-:::
+### DATABASE
 
-**依赖**
+基于 HikariCP 的数据库管理工具（SQL & SQLite）。
 
-- `common`
-- `common-5`
+**软依赖**: `CONFIGURATION` (配置读取)
 
-**软依赖**
+---
 
-- `module-chat`: 颜色支持
+### EFFECT
 
-### module-configuration-legacy
+莫式粒子库。
 
-Bukkit Yaml 封装接口与配置文件管理工具（老版本，6.0.3 以前)
+---
 
-:::warning
+### KETHER
 
-该模块在当前版本下处于弃用状态，不建议使用，也不提供文档。
+内建脚本（动作语句）解决方案。
 
-:::
+**依赖**: `CONFIGURATION`
 
-**依赖**
+**软依赖**: `LANG` (语言文件), `CHAT` (颜色支持), `NMS_UTIL` (记分板语句)
 
-- `common`
-- `common-5`
+---
 
-**软依赖**
+### LANG
 
-- `module-chat`: 颜色支持
+语言文件解决方案。
 
-### module-database
+**依赖**: `CONFIGURATION`
 
-基于 HikariCP 的数据库管理工具（SQL & SQLite）
+**软依赖**: `CHAT` (颜色支持)
 
-:::tip
+---
 
-该模块为跨平台模块
+### METRICS🚰+☁️
 
-:::
+bStats 整合。
 
-**依赖**
+**依赖**: `CONFIGURATION`
 
-- `common`
+---
 
-**软依赖**
+### NAVIGATION🚰
 
-- `module-configuration` 或 `module-configuration-legacy`: 从配置文件加载连接信息
+无实体寻路工具。
 
-### module-database-mongodb
+**依赖**: `NMS`
 
-数据库管理工具（MongoDB）
+---
 
-:::warning
+### NMS🚰
 
-该模块在当前版本下处于弃用状态，不建议使用，也不提供文档。
+跨版本 nms 解决方案与数据包管理工具。
 
-:::
+---
 
-**依赖**
+### NMS_UTIL🚰
 
-- `common`
-- `module-configuration` 或 `module-configuration-legacy`
+常用 nms 工具集合。
 
-### module-effect
+**依赖**: `NMS`
 
-莫式粒子库
+---
 
-:::tip
+### PORTICUS🚰+☁️
 
-该模块为半跨平台模块：可脱离 Minecraft 运行，但无实际意义
+BungeeCord 通讯工具。
 
-:::
+---
 
-**依赖**
+### UI🚰
 
-- `common`
+箱子菜单构建工具。
 
-### module-kether
+**依赖**: `CHAT`
 
-内建脚本（动作语句）解决方案
+**软依赖**: `NMS` (虚拟化菜单)
 
-:::tip
-
-该模块为半跨平台模块：部分语句仅支持 Bukkit 平台
-
-:::
-
-**依赖**
-
-- `common`
-- `common-5`
-- `module-configuration` 或 `module-configuration-legacy`
-
-**软依赖**
-
-- `module-lang`: 语言文件支持
-- `module-chat`: 颜色支持
-- `module-nms`: 记分板语句
-- `module-nms-util`: 记分板语句
-
-### module-lang
-
-语言文件解决方案
-
-:::tip
-
-该模块为跨平台模块
-
-:::
-
-**依赖**
-
-- `common`
-- `common-5`
-- `module-configuration` 或 `module-configuration-legacy`
-
-**软依赖**
-
-- `module-chat`: 颜色支持
-
-### module-metrics🚰+☁️
-
-bStats 整合
-
-**依赖**
-
-- `common`
-- `module-configuration` 或 `module-configuration-legacy`
-
-### module-navigation🚰
-
-无实体寻路工具
-
-**依赖**
-
-- `common`
-- `module-nms`
-
-### module-nms🚰
-
-跨版本 nms 解决方案与数据包管理工具
-
-**依赖**
-
-- `common`
-
-### module-nms-util🚰
-
-常用 nms 工具集合
-
-**依赖**
-
-- `common`
-- `module-nms`
-
-### module-porticus🚰+☁️
-
-BungeeCord 通讯工具
-
-**依赖**
-
-- `common`
-
-### module-ui🚰
-
-箱子菜单构建工具
-
-**依赖**
-
-- `common`
-
-### module-ui-receptacle
-
-箱子菜单构建工具（发包实现）
-
-:::warning
-
-该模块在当前版本下处于弃用状态，不建议使用，也不提供文档。
-
-:::
-
-**依赖**
-
-- `common`
-- `module-nms`
+---
 
 ## 扩展模块
 
-### expansion-alkaid-redis
+### EXPANSION_ALKAID_REDIS
 
-Redis 操作工具
+Redis 操作工具。
 
-:::tip
+**依赖**: `CONFIGURATION` (序列化支持)
 
-该模块为跨平台模块
+---
 
-:::
+### EXPANSION_COMMAND_HELPER
 
-**依赖**
+命令帮助扩展模块。
 
-- `common`
+**依赖**: `CHAT`, `LANG`
 
-**软依赖**
+---
 
-- `module-configuration` 或 `module-configuration-legacy`: 序列化支持
+### EXPANSION_JAVASCRIPT
 
-### expansion-command-helper
+JavaScript 扩展模块。
 
-命令帮助扩展模块
+---
 
-:::tip
+### EXPANSION_PTC
 
-该模块为跨平台模块
+持久化容器扩展模块。
 
-:::
+**依赖**: `DATABASE`, `CONFIGURATION`
 
-**依赖**
+---
 
-- `common`
-- `module-chat`
-- `module-lang`
+### EXPANSION_PTC_OBJECT
 
-### expansion-javascript
+持久化容器扩展模块。
 
-JavaScript 扩展模块
+**依赖**: `DATABASE`, `CONFIGURATION`
 
-:::tip
+---
 
-该模块为跨平台模块
+### EXPANSION_PLAYER_DATABASE
 
-:::
+玩家持久化数据扩展模块。
 
-**依赖**
+**依赖**: `DATABASE`, `CONFIGURATION`
 
-- `common`
+---
 
-### expansion-persistent-container
+### EXPANSION_PLAYER_FAKE_OP🚰
 
-持久化容器扩展模块
+玩家伪 OP 权限扩展模块。
 
-:::tip
+**依赖**: `NMS`
 
-该模块为半跨平台模块：可脱离 Minecraft 运行，但不好用
+---
 
-:::
+### EXPANSION_SUBMIT_CHAIN
 
-**依赖**
+对 `Coroutine API` 的封装扩展模块。
 
-- `common`
-- `module-database`
-- `module-configuration` 或 `module-configuration-legacy`
-
-### expansion-player-database
-
-玩家持久化数据扩展模块
-
-:::tip
-
-该模块为半跨平台模块：可脱离 Minecraft 运行，但不好用
-
-:::
-
-**依赖**
-
-- `common`
-- `module-database`
-- `module-configuration` 或 `module-configuration-legacy`
+---
 
 ## 平台模块
 
 平台模块是插件在指定平台运行的基础，至少需要安装一种。
 
-| 平台                                                          | 模块名称                   | 说明     |
-|-------------------------------------------------------------|------------------------|--------|
-| Bukkit                                                      | `platform-bukkit`      | 无      |
-| BungeeCord                                                  | `platform-bungee`      | 无      |
-| <span style={{color: "darkred"}}><s>CloudNet V3</s></span>  | `platform-cloudnet-v3` | 暂不可用   |
-| <span style={{color: "darkred"}}><s>Nukkit</s></span>       | `platform-nukkit`      | 暂不可用   |
-| <span style={{color: "darkred"}}><s>Sponge API 7</s></span> | `platform-sponge-api7` | 暂不可用   |
-| <span style={{color: "darkred"}}><s>Sponge API 8</s></span> | `platform-sponge-api8` | 暂不可用   |
-| <span style={{color: "darkred"}}><s>Sponge API 9</s></span> | `platform-sponge-api9` | 暂不可用   |
-| Velocity                                                    | `platform-velocity`    | 无      |
-| Application                                                 | `platform-application` | 用于独立程序 |
+| 平台                                                          | 模块名称                     | 说明     |
+|-------------------------------------------------------------|--------------------------|--------|
+| Bukkit                                                      | `BUKKIT`                 | 无      |
+| BungeeCord                                                  | `BUNGEE`                 | 无      |
+| <span style={{color: "darkred"}}><s>CloudNet V3</s></span>  | `"platform-cloudnet-v3"` | 暂不可用   |
+| <span style={{color: "darkred"}}><s>Nukkit</s></span>       | `"platform-nukkit"`      | 暂不可用   |
+| <span style={{color: "darkred"}}><s>Sponge API 7</s></span> | `"platform-sponge-api7"` | 暂不可用   |
+| <span style={{color: "darkred"}}><s>Sponge API 8</s></span> | `"platform-sponge-api8"` | 暂不可用   |
+| <span style={{color: "darkred"}}><s>Sponge API 9</s></span> | `"platform-sponge-api9"` | 暂不可用   |
+| Velocity                                                    | `VELOCITY`               | 无      |
+| Application                                                 | `"platform-application"` | 用于独立程序 |
 

@@ -16,7 +16,7 @@ sidebar_position: 4
 
 在混淆时必须排除 TabooLib 的所有类，否则会导致混淆后的插件无法正常运行。
 
-**例如 ProGuard：**
+**例如 ProGuard: **
 
 ```
 -keep class **.taboolib.** { *; }

@@ -13,7 +13,7 @@ TabooLib 是基于多种 Minecraft 服务端平台的插件开发框架，你可
 
 ## 版本信息
 
-| 构建版本                                                                                                                                                               | 发行时间                                                                                                                                                              | 插件版本                                                                                                                                                                            |
+| 发行版本                                                                                                                                                               | 发行时间                                                                                                                                                              | 插件版本                                                                                                                                                                            |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ![](https://img.shields.io/badge/dynamic/json?label=Version&query=%24.tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2FTabooLib%2FTabooLib%2Freleases%2Flatest) | ![](https://img.shields.io/badge/dynamic/json?label=Date&query=%24.created_at&url=https%3A%2F%2Fapi.github.com%2Frepos%2FTabooLib%2FTabooLib%2Freleases%2Flatest) | ![](https://img.shields.io/badge/dynamic/json?label=Plugin&query=%24.tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2FTabooLib%2Ftaboolib-gradle-plugin%2Freleases%2Flatest) |
 
@@ -23,7 +23,7 @@ plugins {
 }
 
 taboolib {
-    version { taboolib = "构建版本" }
+    version { taboolib = "发行版本" }
 }
 ```
 
@@ -32,3 +32,11 @@ taboolib {
 你可以使用旧版本的 TabooLib 来开发插件，但我们始终建议你更新到最新稳定版本。
 
 :::
+
+## 请先看看
+
+在开始使用 TabooLib 之前，建议您先阅读以下内容：
+
++ [编码习惯](plugin/rule/code)
++ [代码规范](contributing/codestyle)
++ [养成良好的写作习惯之「盘古之白」](https://indigovoid.github.io/2020/03/17/写作习惯1/)

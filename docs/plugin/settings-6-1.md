@@ -11,7 +11,7 @@ sidebar_position: 2
 包括项目名称、包名和版本。
 
 ```properties title="gradle.properties"
-# 包名（通常为：域名倒置 + 项目名称）
+# 包名（通常为: 域名倒置 + 项目名称）
 group=com.github.username.myproject
 # 版本
 version=1.0.0
@@ -73,7 +73,7 @@ taboolib {
 }
 ```
 
-在绝大多数的情况下，可能都是这样的：
+在绝大多数的情况下，可能都是这样的: 
 
 ```kotlin title="build.gradle.kts"
 import io.izzel.taboolib.gradle.*
@@ -127,7 +127,7 @@ taboolib {
 * 依赖
 * 链接（例如网站）
 
-#### 仅限：Bukkit
+#### 仅限: Bukkit
 
 * 前缀
 * 加载阶段
@@ -184,7 +184,7 @@ taboolib {
 }
 ```
 
-依赖的扩展选项大多数可以同时存在，如下所示：
+依赖的扩展选项大多数可以同时存在，如下所示: 
 
 ```kotlin title="build.gradle.kts"
 taboolib {

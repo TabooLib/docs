@@ -49,5 +49,3 @@ class RuntimeEnv
 默认通过 **阿里云中央仓库** 下载，也可使用 `repository` 指定其他仓库。
 
 :::
-
-在后面的章节中，我们会对 `RuntimeDependency` 进行详细介绍。

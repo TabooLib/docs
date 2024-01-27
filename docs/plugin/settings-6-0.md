@@ -89,7 +89,7 @@ taboolib {
 * 依赖
 * 链接（例如网站）
 
-#### 仅限：Bukkit、Nukkit
+#### 仅限: Bukkit、Nukkit
 
 * 前缀
 * 加载阶段
@@ -149,7 +149,7 @@ taboolib {
 }
 ```
 
-依赖的扩展选项大多数可以同时存在，如下所示：
+依赖的扩展选项大多数可以同时存在，如下所示: 
 
 ```kotlin title="build.gradle.kts"
 taboolib {

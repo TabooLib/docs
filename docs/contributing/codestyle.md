@@ -17,7 +17,7 @@ sidebar_position: 99
 - 异常
   - 对于被忽略的异常，需将异常变量命名为 `ignored`
 
-尽管我们强烈建议你阅读 Kotlin 风格指南，但是它们实在是太长了。为了帮助你快速开始，下面是一个格式正确的代码样例：
+尽管我们强烈建议你阅读 Kotlin 风格指南，但是它们实在是太长了。为了帮助你快速开始，下面是一个格式正确的代码样例: 
 
 ```kotlin title="Example.kts" showLineNumbers
 package io.izzel.taboolib.example
