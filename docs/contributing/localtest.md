@@ -38,7 +38,7 @@ plugins {
 taboolib {
     env {
         // 安装模块
-        install(UNIVERAL, BUKKIT)
+        install(UNIVERSAL, BUKKIT)
         // 将运行时的下载地址指向本地仓库
         repoTabooLib = project.repositories.mavenLocal().url.toString()
     }
