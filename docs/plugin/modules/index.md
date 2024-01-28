@@ -164,7 +164,7 @@ BungeeCord 通讯工具。
 
 ## 扩展模块
 
-### EXPANSION_ALKAID_REDIS
+### EXPANSION_REDIS
 
 Redis 操作工具。
 
