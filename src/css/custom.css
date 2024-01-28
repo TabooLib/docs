@@ -3,10 +3,19 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
+html,
+body {
+	scroll-behavior: smooth;
+}
 
 @font-face {
   font-family: Fusion-Pixel-12-proportional-zh_cn;
   src: url("/static/fonts/fusion-pixel-12px-monospaced-zh_hans.woff2");
+}
+
+@font-face {
+  font-family: AlibabaPuHuiTi-3-55-Regular;
+  src: url("/static/fonts/AlibabaPuHuiTi-3-55-Regular.woff2");
 }
 
 h1,
@@ -16,6 +25,14 @@ h4,
 h5,
 h6 {
   font-family: Fusion-Pixel-12-proportional-zh_cn, sans-serif;
+}
+
+.markdown {
+  font-family: AlibabaPuHuiTi-3-55-Regular, sans-serif;
+}
+
+.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+  font-family: AlibabaPuHuiTi-3-55-Regular, sans-serif;
 }
 
 body {
