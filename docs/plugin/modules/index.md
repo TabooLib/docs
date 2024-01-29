@@ -31,7 +31,6 @@ sidebar_position: 0
 | 模块名称                 | 包含模块                                                        |
 |----------------------|-------------------------------------------------------------|
 | `UNIVERSAL`          | `CHAT`, `CONFIGURATION`, `LANG`, `EXPANSION_COMMAND_HELPER` |
-| `UNIVERSAL_DATABASE` | `DATABASE`, `EXPANSION_PTC_OBJECT`                          |
 | `BUKKIT_ALL`         | `BUKKIT`, `BUKKIT_HOOK`, `BUKKIT_UTIL`, `BUKKIT_XSERIES`    |
 
 ---
