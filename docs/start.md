@@ -11,6 +11,8 @@ slug: /
 
 TabooLib 是基于多种 Minecraft 服务端平台的插件开发框架，你可以在 **原生** 的 Bukkit 平台运行基于该插件，同时也可以在 BungeeCord、Velocity 等平台运行。
 
+> 官方文档龟速更新, 各模块教程请移步 [枫溪的 TabooLib 使用手册](https://iki9o5w080.feishu.cn/wiki/PLfAw1gzsiIBCgkr4slcNp8ln7N) 
+
 ## 版本信息
 
 | 发行版本                                                                                                                                                               | 发行时间                                                                                                                                                              | 插件版本                                                                                                                                                                            |
