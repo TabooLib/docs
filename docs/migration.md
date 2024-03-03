@@ -112,13 +112,13 @@ taboolib {
 自 `6.1` 起构建插件将不再含有完整模块，因此对于拓展插件的开发，需使用其 API 版本。
 
 ```bash
-gradlew build taboolibBuildApi
+gradlew taboolibBuildApi
 ```
 
 或
 
 ```bash
-gradlew build taboolibBuildApi -PDeleteCode
+gradlew taboolibBuildApi -PDeleteCode
 ```
 
 > 参数 -PDeleteCode 表示移除所有逻辑代码以减少体积。
