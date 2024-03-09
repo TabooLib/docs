@@ -46,7 +46,7 @@ git clone --depth=1 https://github.com/taboolib/taboolib-multi-module-sdk MyProj
 发行版本用于正常使用, 不含 TabooLib 本体。
 
 ```bash
-gradlew clean build
+gradlew build
 ```
 
 ### 开发版本
