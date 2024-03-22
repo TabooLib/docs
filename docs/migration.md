@@ -1,13 +1,13 @@
 ---
-sidebar_position: 999
+sidebar_position: 998
 slug: /migration
 ---
 
-# 版本迁移❗️
+# 版本升级❗️
 
 :::tip
 
-本文用于帮助基于 `6.0` 开发的项目迁移到 `6.1`
+本文用于帮助 **开发者** 将基于 `6.0` 开发的项目迁移到 `6.1`
 
 :::
 
@@ -23,11 +23,11 @@ slug: /migration
 
 :::
 
-## 1. 升级 TabooLib Gradle Plugin 版本
+## 1. 升级 Gradle Plugin 版本
 
 ```kotlin title="build.gradle.kts"
 plugins {
-    id("io.izzel.taboolib") version "2.0.2" // 最低要求
+    id("io.izzel.taboolib") version "2.0.11" // 最低要求
 }
 ```
 
@@ -57,7 +57,7 @@ taboolib {
     install("expansion-command-helper")
     install("expansion-javascript")
     classifier = null
-    version = "6.0.12-local"
+    version = "6.0.12"
     relocate("ink.ptms.um", "ink.ptms.chemdah.um")
     options("keep-kotlin-module")
 }
@@ -85,7 +85,7 @@ taboolib {
         install(BUKKIT_ALL)
     }
     version {
-        taboolib = "6.1.0"
+        taboolib = "6.1.1-beta15"
     }
     relocate("ink.ptms.um", "ink.ptms.chemdah.um")
 }

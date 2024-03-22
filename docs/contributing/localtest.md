@@ -32,7 +32,7 @@ gradlew publishMavenPublicationToMavenLocalRepository -PdevLocal
 
 ```kotlin title="build.gradle.kts" showLineNumbers
 plugins {
-    id("io.izzel.taboolib") version "2.0.2"
+    id("io.izzel.taboolib") version "2.0.11"
 }
 
 taboolib {

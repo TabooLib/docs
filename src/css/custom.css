@@ -318,3 +318,9 @@ h1 {
   padding-left: 2rem;
   padding-right: 2rem;
 }
+
+#game_img {
+  box-shadow: black 1px 1px 5px;
+  border-radius: 8px;
+  margin-bottom: 1rem
+}
