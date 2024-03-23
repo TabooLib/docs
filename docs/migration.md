@@ -85,7 +85,7 @@ taboolib {
         install(BUKKIT_ALL)
     }
     version {
-        taboolib = "6.1.1-beta15"
+        taboolib = "6.1.1-beta17"
     }
     relocate("ink.ptms.um", "ink.ptms.chemdah.um")
 }

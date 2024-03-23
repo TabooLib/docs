@@ -5,7 +5,7 @@ slug: /repo_migration
 
 # 仓库迁移❗️
 
-由于一些历史遗留问题，下载源 `ptms.ink:8081` 无法使用，自 `6.1.1-beta15` 起迁移至新的下载源。
+由于一些历史遗留问题，下载源 `ptms.ink:8081` 无法使用，自 `6.1.1-beta17` 起迁移至新的下载源。
 
 :::tip
 
@@ -36,11 +36,11 @@ slug: /repo_migration
 
 ### 6.0
 
-如果你正在使用 TabooLib `6.0` 开发插件，请手动添加新的仓库地址。
+如果你正在使用 TabooLib `6.0` 开发插件，请升级到：
 
 ```kts
-repository {
-    maven { url = uri("https://repo.tabooproject.org/repository/releases") }
+plugins {
+    id("io.izzel.taboolib") version "1.60"
 }
 ```
 
@@ -54,6 +54,6 @@ plugins {
 }
 
 taboolib {
-    version { taboolib = "6.1.1-beta15" }
+    version { taboolib = "6.1.1-beta17" }
 }
 ```
