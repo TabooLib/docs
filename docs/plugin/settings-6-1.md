@@ -153,7 +153,7 @@ taboolib {
 ```kotlin title="build.gradle.kts"
 taboolib {
     description {
-        contributor {
+        contributors {
             // 作者名称
             name("坏黑")
             // 作者说明（仅在 Sponge 平台有效）
