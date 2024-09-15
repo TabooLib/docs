@@ -1,9 +1,8 @@
 ---
-sidebar_position: 998
-slug: /migration
+sidebar_position: 1
 ---
 
-# 版本升级❗️
+# 版本升级 (v6.1)
 
 :::tip
 
