@@ -21,49 +21,57 @@ Bukkit 核心文件的格式为:
 
 ### 版本列表
 
-| 版本          | 版本                                | 说明   |
-|-------------|-----------------------------------|------|
-| 1.8         | `ink.ptms.core:v10800`            | 无    |
-| 1.9         | `ink.ptms.core:v10900`            | 无    |
-| 1.10        | `ink.ptms.core:v11000`            | 无    |
-| 1.11        | `ink.ptms.core:v11100`            | 无    |
-| 1.12        | `ink.ptms.core:v11200`            | 无    |
+| 版本        | 版本                              | 说明     |
+|-------------|-----------------------------------|---------|
+| 1.8         | `ink.ptms.core:v10800`            | 无       |
+| 1.9         | `ink.ptms.core:v10900`            | 无       |
+| 1.10        | `ink.ptms.core:v11000`            | 无       |
+| 1.11        | `ink.ptms.core:v11100`            | 无       |
+| 1.12        | `ink.ptms.core:v11200`            | 无       |
 | 1.12        | `ink.ptms.core:v11200-minimize`   | 压缩版本 |
-| 1.13        | `ink.ptms.core:v11300`            | 无    |
-| 1.14        | `ink.ptms.core:v11400`            | 无    |
+| 1.13        | `ink.ptms.core:v11300`            | 无       |
+| 1.14        | `ink.ptms.core:v11400`            | 无       |
 | 1.14        | `ink.ptms.core:v11400-minimize`   | 压缩版本 |
-| 1.15        | `ink.ptms.core:v11500`            | 无    |
-| 1.16        | `ink.ptms.core:v11600`            | 无    |
+| 1.15        | `ink.ptms.core:v11500`            | 无       |
+| 1.16        | `ink.ptms.core:v11600`            | 无       |
 | 1.16        | `ink.ptms.core:v11600-minimize`   | 压缩版本 |
-| 1.16.4      | `ink.ptms.core:v11604`            | 无    |
-| 1.16.5      | `ink.ptms.core:v11605`            | 无    |
-| 1.17.1      | `ink.ptms.core:v11701`            | 无    |
+| 1.16.4      | `ink.ptms.core:v11604`            | 无       |
+| 1.16.5      | `ink.ptms.core:v11605`            | 无       |
+| 1.17.1      | `ink.ptms.core:v11701`            | 无       |
 | 1.17.1      | `ink.ptms.core:v11701-minimize`   | 压缩版本 |
-| 1.18        | `ink.ptms.core:v11800`            | 无    |
+| 1.18        | `ink.ptms.core:v11800`            | 无       |
 | 1.18        | `ink.ptms.core:v11800-minimize`   | 压缩版本 |
-| 1.18.1      | `ink.ptms.core:v11801`            | 无    |
-| 1.18.2      | `ink.ptms.core:v11802`            | 无    |
+| 1.18.1      | `ink.ptms.core:v11801`            | 无       |
+| 1.18.2      | `ink.ptms.core:v11802`            | 无       |
 | 1.18.2      | `ink.ptms.core:v11802-minimize`   | 压缩版本 |
-| 1.19        | `ink.ptms.core:v11900`            | 无    |
+| 1.19        | `ink.ptms.core:v11900`            | 无       |
 | 1.19        | `ink.ptms.core:v11900-minimize`   | 压缩版本 |
-| 1.19.1      | `ink.ptms.core:v11901`            | 无    |
+| 1.19.1      | `ink.ptms.core:v11901`            | 无       |
 | 1.19.1      | `ink.ptms.core:v11901-minimize`   | 压缩版本 |
-| 1.19.2      | `ink.ptms.core:v11902`            | 无    |
+| 1.19.2      | `ink.ptms.core:v11902`            | 无       |
 | 1.19.2      | `ink.ptms.core:v11902-minimize`   | 压缩版本 |
-| 1.19.3      | `ink.ptms.core:v11903`            | 无    |
+| 1.19.3      | `ink.ptms.core:v11903`            | 无       |
 | 1.19.3      | `ink.ptms.core:v11903-minimize`   | 压缩版本 |
-| 1.19.4      | `ink.ptms.core:v11904`            | 无    |
+| 1.19.4      | `ink.ptms.core:v11904`            | 无       |
 | 1.19.4      | `ink.ptms.core:v11904-minimize`   | 压缩版本 |
-| 1.19.4 (R2) | `ink.ptms.core:v11904.2`          | 无    |
+| 1.19.4 (R2) | `ink.ptms.core:v11904.2`          | 无       |
 | 1.19.4 (R2) | `ink.ptms.core:v11904.2-minimize` | 压缩版本 |
-| 1.20        | `ink.ptms.core:v12000`            | 无    |
+| 1.20        | `ink.ptms.core:v12000`            | 无       |
 | 1.20        | `ink.ptms.core:v12000-minimize`   | 压缩版本 |
-| 1.20.1      | `ink.ptms.core:v12001`            | 无    |
+| 1.20.1      | `ink.ptms.core:v12001`            | 无       |
 | 1.20.1      | `ink.ptms.core:v12001-minimize`   | 压缩版本 |
-| 1.20.2      | `ink.ptms.core:v12002`            | 无    |
+| 1.20.2      | `ink.ptms.core:v12002`            | 无       |
 | 1.20.2      | `ink.ptms.core:v12002-minimize`   | 压缩版本 |
-| 1.20.4      | `ink.ptms.core:v12004`            | 无    |
+| 1.20.4      | `ink.ptms.core:v12004`            | 无       |
 | 1.20.4      | `ink.ptms.core:v12004-minimize`   | 压缩版本 |
+| 1.20.5      | `ink.ptms.core:v12005`            | 无       |
+| 1.20.5      | `ink.ptms.core:v12005-minimize`   | 压缩版本 |
+| 1.20.6      | `ink.ptms.core:v12006`            | 无       |
+| 1.20.6      | `ink.ptms.core:v12006-minimize`   | 压缩版本 |
+| 1.21        | `ink.ptms.core:v12100`            | 无       |
+| 1.21        | `ink.ptms.core:v12100-minimize`   | 压缩版本 |
+| 1.21.1      | `ink.ptms.core:v12101`            | 无       |
+| 1.21.1      | `ink.ptms.core:v12101-minimize`   | 压缩版本 |
 
 压缩版本是用于网络较差的地区或 **Github Actions** 下的解决方案，无法进行反编译。
 

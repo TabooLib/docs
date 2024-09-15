@@ -16,210 +16,319 @@ sidebar_position: 0
 
 在 `6.1` 版本中，标准库是默认引用的，包含了:
 
-+ `COMMON`：TabooLib 加载器，打包进入插件
-+ `COMMON-LEGACY-API`：继承自 `5.x` 版本的旧工具
-+ `COMMON-PLATFORM-API`：跨平台接口
-+ `COMMON_REFLEX`：反射工具
-+ `COMMON_UTILS`：核心工具
-
----
-
-## 聚合模块
-
-聚合模块是指包含了多个模块的别名，用于快速引用。
-
-| 模块名称                 | 包含模块                                                        |
-|----------------------|-------------------------------------------------------------|
-| `UNIVERSAL`          | `CHAT`, `CONFIGURATION`, `LANG`, `EXPANSION_COMMAND_HELPER` |
-| `BUKKIT_ALL`         | `BUKKIT`, `BUKKIT_HOOK`, `BUKKIT_UTIL`, `BUKKIT_XSERIES`    |
++ `common`：TabooLib 加载器，打包进入插件
++ `common-legacy-api`：继承自 `5.x` 版本的旧工具
++ `common-platform-api`：跨平台接口
++ `common-reflex`：反射工具
++ `common-utils`：核心工具
 
 ---
 
 ## 标准模块
 
-### AI🚰
+### Basic
 
-管理与注册自定义实体 AI（Pathfinder）。
+基础模块：配置文件，任务链。
 
-**依赖**: `NMS`
-
----
-
-### BUKKIT_HOOK🚰
-
-Bukkit 第三方插件支持，例如 `Placeholder`, `Vault` 等。
+包含：
+- basic-configuration
+- basic-submit-chain
 
 ---
 
-### BUKKIT_UTIL🚰
+### BukkitFakeOp🚰
 
-Bukkit 拓展工具。
+Bukkit 虚拟 OP 工具。
 
-**软依赖**: `BUKKIT_XSERIES` (物品构造器)
-
----
-
-### BUKKIT_XSERIES🚰
-
-Bukkit XSeries 支持。
-
-**软依赖**: `CHAT` (读取物品), `CONFIGURATION` (读取物品)
+包含：
+- bukkit-fake-op
+- bukkit-nms
 
 ---
 
-### CHAT
+### BukkitHook🚰
 
-Raw 信息构建工具与 1.16 RGB 颜色转换。
+Bukkit 与 Vault、PlaceholderAPI 等插件交互。
 
----
-
-### CONFIGURATION
-
-配置文件解决方案（Yaml & Toml & Hocon & Json)
-
-**软依赖**: `CHAT` (颜色支持)
+包含：
+- bukkit-hook
 
 ---
 
-### DATABASE
+### BukkitNavigation🚰
 
-基于 HikariCP 的数据库管理工具（SQL & SQLite）。
+Bukkit 寻路工具。
 
-**软依赖**: `CONFIGURATION` (配置读取)
-
----
-
-### EFFECT
-
-莫式粒子库。
+包含：
+- bukkit-navigation
+- bukkit-nms
 
 ---
 
-### KETHER
+### BukkitUI🚰
 
-内建脚本（动作语句）解决方案。
+Bukkit 箱子菜单。
 
-**依赖**: `CONFIGURATION`
-
-**软依赖**: `LANG` (语言文件), `CHAT` (颜色支持), `NMS_UTIL` (记分板语句)
-
----
-
-### LANG
-
-语言文件解决方案。
-
-**依赖**: `CONFIGURATION`
-
-**软依赖**: `CHAT` (颜色支持)
+包含：
+- bukkit-ui
+- bukkit-ui-12100
+- bukkit-ui-legacy
+- bukkit-util
+- bukkit-xseries
+- bukkit-xseries-item
+- bukkit-nms
+- minecraft-chat
 
 ---
 
-### METRICS🚰+☁️
+### BukkitUtil🚰
 
-bStats 整合。
+Bukkit 扩展工具。
 
-**依赖**: `CONFIGURATION`
-
----
-
-### NAVIGATION🚰
-
-无实体寻路工具。
-
-**依赖**: `NMS`
+包含：
+- bukkit-util
+- bukkit-xseries
+- minecraft-chat
+- minecraft-i18n
+- basic-configuration
 
 ---
 
-### NMS🚰
+### XSeries🚰
 
-跨版本 nms 解决方案与数据包管理工具。
+XSeries 支持。
 
----
-
-### NMS_UTIL🚰
-
-常用 nms 工具集合。
-
-**依赖**: `NMS`
+包含：
+- bukkit-xseries
 
 ---
 
-### PORTICUS🚰+☁️
+### XSeriesItem🚰
 
-BungeeCord 通讯工具。
+XSeries（XSkull 及 ItemBuilder）支持。
 
----
-
-### UI🚰
-
-箱子菜单构建工具。
-
-**依赖**: `CHAT`
-
-**软依赖**: `NMS` (虚拟化菜单)
+包含：
+- bukkit-xseries
+- bukkit-xseries-item
 
 ---
 
-## 扩展模块
+### BukkitNMS🚰
 
-### EXPANSION_REDIS
+Bukkit NMS 支持。
 
-Redis 操作工具。
-
-**依赖**: `CONFIGURATION` (序列化支持)
-
----
-
-### EXPANSION_COMMAND_HELPER
-
-命令帮助扩展模块。
-
-**依赖**: `CHAT`, `LANG`
+包含：
+- bukkit-nms
 
 ---
 
-### EXPANSION_JAVASCRIPT
+### BukkitNMSUtil🚰
 
-JavaScript 扩展模块。
+Bukkit NMS 扩展工具。
 
----
-
-### EXPANSION_PTC
-
-持久化容器扩展模块。
-
-**依赖**: `DATABASE`, `CONFIGURATION`
-
----
-
-### EXPANSION_PTC_OBJECT
-
-持久化容器扩展模块。
-
-**依赖**: `DATABASE`, `CONFIGURATION`
+包含：
+- bukkit-nms-legacy
+- bukkit-nms-stable
+- bukkit-nms-tag
+- bukkit-nms-tag-12005
+- bukkit-nms-tag-legacy
+- bukkit-nms
+- (以及 [BukkitUtil](#bukkitutil) 的所有模块)
 
 ---
 
-### EXPANSION_PLAYER_DATABASE
+### BukkitNMSItemTag🚰
 
-玩家持久化数据扩展模块。
+Bukkit NMS ItemTag 工具。
 
-**依赖**: `DATABASE`, `CONFIGURATION`
-
----
-
-### EXPANSION_PLAYER_FAKE_OP🚰
-
-玩家伪 OP 权限扩展模块。
-
-**依赖**: `NMS`
+包含：
+- bukkit-nms-tag
+- bukkit-nms-tag-12005
+- bukkit-nms-tag-legacy
+- bukkit-nms
+- minecraft-chat
 
 ---
 
-### EXPANSION_SUBMIT_CHAIN
+### BukkitNMSDataSerializer🚰
 
-对 `Coroutine API` 的封装扩展模块。
+Bukkit NMS 数据序列化工具。
+
+包含：
+- bukkit-nms-data-serializer
+- bukkit-nms
+
+---
+
+### BukkitNMSEntityAI🚰
+
+Bukkit NMS 实体 AI。
+
+包含：
+- bukkit-nms-ai
+- bukkit-nms
+
+---
+
+### Database
+
+数据库支持。
+
+包含：
+- database
+- basic-configuration
+
+---
+
+### DatabaseAlkaidRedis
+
+Alkaid Redis 支持。
+
+包含：
+- database-alkaid-redis
+- basic-configuration
+
+---
+
+### DatabaseIoc
+
+IOC 支持。
+
+包含：
+- database-ioc
+- basic-configuration
+
+---
+
+### DatabaseLettuceRedis
+
+Lettuce Redis 支持。
+
+包含：
+- database-lettuce-redis
+- basic-configuration
+
+---
+
+### DatabasePlayer
+
+玩家数据库。
+
+包含：
+- database-player
+- (以及 [Database](#database) 的所有模块)
+
+---
+
+### DatabasePtc
+
+Persistent Container。
+
+包含：
+- database-ptc
+- (以及 [Database](#database) 的所有模块)
+
+---
+
+### DatabasePtcObject
+
+Persistent Container With Object。
+
+包含：
+- database-ptc-object
+- (以及 [Database](#database) 的所有模块)
+
+---
+
+### MinecraftChat
+
+Minecraft 文本工具。
+
+包含：
+- minecraft-chat
+
+---
+
+### MinecraftEffect
+
+Minecraft 效果工具。
+
+包含：
+- minecraft-effect
+
+---
+
+### CommandHelper
+
+指令帮助。
+
+包含：
+- minecraft-command-helper
+- minecraft-chat
+- minecraft-i18n
+
+---
+
+### I18n
+
+国际化接口。
+
+包含：
+- minecraft-i18n
+- minecraft-chat
+- basic-configuration
+
+---
+
+### Kether
+
+Kether 脚本引擎。
+
+包含：
+- minecraft-kether
+- minecraft-chat
+- minecraft-i18n
+- bukkit-nms
+- bukkit-nms-stable
+- basic-configuration
+
+---
+
+### Metrics🚰+☁️
+
+BStats 数据统计。
+
+包含：
+- minecraft-metrics
+- basic-configuration
+
+---
+
+### Porticus🚰+☁️
+
+BungeeCord 通讯。
+
+包含：
+- minecraft-porticus
+- basic-configuration
+
+---
+
+### JavaScript
+
+Javascript 脚本环境。
+
+包含：
+- script-javascript
+
+---
+
+### Jexl
+
+Jexl 脚本环境。
+
+包含：
+- script-jexl
 
 ---
 
@@ -227,15 +336,10 @@ JavaScript 扩展模块。
 
 平台模块是插件在指定平台运行的基础，至少需要安装一种。
 
-| 平台                                                          | 模块名称                     | 说明     |
-|-------------------------------------------------------------|--------------------------|--------|
-| Bukkit                                                      | `BUKKIT`                 | 无      |
-| BungeeCord                                                  | `BUNGEE`                 | 无      |
-| <span style={{color: "darkred"}}><s>CloudNet V3</s></span>  | `"platform-cloudnet-v3"` | 暂不可用   |
-| <span style={{color: "darkred"}}><s>Nukkit</s></span>       | `"platform-nukkit"`      | 暂不可用   |
-| <span style={{color: "darkred"}}><s>Sponge API 7</s></span> | `"platform-sponge-api7"` | 暂不可用   |
-| <span style={{color: "darkred"}}><s>Sponge API 8</s></span> | `"platform-sponge-api8"` | 暂不可用   |
-| <span style={{color: "darkred"}}><s>Sponge API 9</s></span> | `"platform-sponge-api9"` | 暂不可用   |
-| Velocity                                                    | `VELOCITY`               | 无      |
-| Application                                                 | `"platform-application"` | 用于独立程序 |
-
+| 平台        | 模块名称      | 说明         |
+|-------------|---------------|-------------|
+| Bukkit      | `Bukkit`      | 无           |
+| BungeeCord  | `BungeeCord`  | 无           |
+| Velocity    | `Velocity`    | 无           |
+| AfyBroker   | `AfyBroker`   | 无           |
+| Application | `Application` | 用于独立程序 |
