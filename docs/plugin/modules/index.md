@@ -336,10 +336,10 @@ Jexl 脚本环境。
 
 平台模块是插件在指定平台运行的基础，至少需要安装一种。
 
-| 平台        | 模块名称      | 说明         |
-|-------------|---------------|-------------|
-| Bukkit      | `Bukkit`      | 无           |
-| BungeeCord  | `BungeeCord`  | 无           |
-| Velocity    | `Velocity`    | 无           |
-| AfyBroker   | `AfyBroker`   | 无           |
-| Application | `Application` | 用于独立程序 |
+| 平台        | 模块名称      | 说明                         |
+|-------------|---------------|----------------------------|
+| Bukkit      | `Bukkit`      | 包含 Bukkit 平台的启动项     |
+| BungeeCord  | `BungeeCord`  | 包含 BungeeCord 平台的启动项 |
+| Velocity    | `Velocity`    | 包含 Velocity 平台的启动项   |
+| AfyBroker   | `AfyBroker`   | 包含 AfyBroker 平台的启动项  |
+| Application | `Application` | 可独立运行的 Java 程序       |
