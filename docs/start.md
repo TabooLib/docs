@@ -7,7 +7,7 @@ slug: /
 
 欢迎来到 TabooLib Docs。
 
-这里定义了基于 [TabooLib](https://github.com/taboolib/taboolib) `6.1` 编写 Minecraft 插件而提供的指导性准则和建议。
+这里定义了基于 [TabooLib](https://github.com/taboolib/taboolib) `6.2` 编写 Minecraft 插件而提供的指导性准则和建议。
 
 TabooLib 是基于多种 Minecraft 服务端平台的插件开发框架，你可以在 **原生** 的 Bukkit 平台运行基于该插件，同时也可以在 BungeeCord、Velocity 等平台运行。
 

@@ -6,10 +6,91 @@ slug: /plugin/modules/common
 
 # common
 
-TabooLib 的核心部分，环境部署以及跨平台接口
+TabooLib 的加载器，负责环境部署，是核心部分。 
 
-:::tip
+## `TabooLib`
 
-任何 TabooLib 插件都需要安装此模块
+TabooLib 的入口类，主要包含一些生命周期方法。
 
-:::
+**注册生命周期任务**
+
+```java
+/**
+  * 推迟任务到指定生命周期下执行，如果生命周期已经过去则立即执行
+  *
+  * @param lifeCycle 生命周期
+  * @param runnable  任务
+  */
+public static void registerLifeCycleTask(LifeCycle lifeCycle, int priority, Runnable runnable)
+```
+
+**获取一些信息**
+
+```java
+/**
+  * 是否停止 TabooLib 及插件加载流程
+  */
+public static boolean isStopped()
+
+/**
+  * 停止 TabooLib 及插件加载流程
+  */
+public static void setStopped(boolean value)
+
+/**
+  * 获取当前插件所有被唤醒的类
+  */
+public static Map<String, Object> getAwakenedClasses()
+```
+
+## `PrimitiveSettings`
+
+原始配置类，用于获取与 TabooLib 有关的配置。
+
+```java
+/**
+  * 运行参数
+  */
+public static final Properties RUNTIME_PROPERTIES
+
+/**
+  * 版本信息
+  */
+public static final Properties VERSION_PROPERTIES
+
+...
+```
+
+## `Plugin`
+
+插件基类，包含基本生命周期方法。要求必须是 `object` 类型。
+
+```kotlin
+object MyPlugin : Plugin() {
+
+  override fun onLoad() {
+    // 插件加载时执行
+  }
+
+  override fun onEnable() {
+    // 插件启用时执行
+}
+```
+
+## `@PlatformSide`
+
+定义平台类型，用于区分不同的平台。
+
+```kotlin
+/**
+ * 此类仅在 Bukkit 平台下会被加载
+ */
+@PlatformSide(Platform.BUKKIT)
+object BukkitListener {
+
+  @SubscribeEvent
+  fun onPlayerJoin(event: PlayerJoinEvent) {
+    // 玩家加入时执行
+  }
+}
+```
