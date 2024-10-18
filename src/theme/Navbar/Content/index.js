@@ -18,12 +18,11 @@ function useNavbarItems() {
 }
 
 function NavbarItems({items}) {
-    const disabledItems = ["快速开始", "组件市场", "优秀案例"];
     return (
         <ul className="links">
             {items.map((item) => (
                 <li key={item.label} aria-current={item.label === '开发文档' ? 'page' : undefined}>
-                    <button className="none-button" disabled={disabledItems.includes(item.label)}>
+                    <button className="none-button">
                         <a href={item.href}>{item.label}</a>
                     </button>
                 </li>
