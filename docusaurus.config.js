@@ -71,16 +71,6 @@ const config = {
                         position: 'left',
                     },
                     {
-                        href: 'https://tabooproject.org/quickstart',
-                        label: '快速开始',
-                        position: 'left'
-                    },
-                    {
-                        href: 'https://tabooproject.org/market',
-                        label: '组件市场',
-                        position: 'left',
-                    },
-                    {
                         href: '/',
                         label: '开发文档',
                         position: 'left',
