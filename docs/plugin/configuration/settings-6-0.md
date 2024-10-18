@@ -253,4 +253,4 @@ taboolib {
 }
 ```
 
-在 [第三方库](dependencies/library.md) 中，对重定向有更详细的说明。
+在 [第三方库](plugin/dependencies/library.md) 中，对重定向有更详细的说明。
