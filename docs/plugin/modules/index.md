@@ -103,16 +103,6 @@ XSeries 支持。
 
 ---
 
-### XSeriesItem🚰
-
-XSeries（XSkull 及 ItemBuilder）支持。
-
-包含：
-- bukkit-xseries
-- bukkit-xseries-item
-
----
-
 ### BukkitNMS🚰
 
 Bukkit NMS 支持。
@@ -133,7 +123,7 @@ Bukkit NMS 扩展工具。
 - bukkit-nms-tag-12005
 - bukkit-nms-tag-legacy
 - bukkit-nms
-- (以及 [BukkitUtil](#bukkitutil) 的所有模块)
+- (以及 [BukkitUtil](#bukkitutil))
 
 ---
 
@@ -190,7 +180,7 @@ Alkaid Redis 支持。
 
 ---
 
-### DatabaseIoc
+### IOC
 
 IOC 支持。
 
@@ -200,7 +190,17 @@ IOC 支持。
 
 ---
 
-### DatabaseLettuceRedis
+### ORM
+
+ORM 支持。
+
+包含：
+- database-orm
+- (以及 [Database](#database))
+
+---
+
+### LettuceRedis
 
 Lettuce Redis 支持。
 
@@ -216,27 +216,37 @@ Lettuce Redis 支持。
 
 包含：
 - database-player
-- (以及 [Database](#database) 的所有模块)
+- (以及 [Database](#database))
 
 ---
 
-### DatabasePtc
+### DatabasePlayerRedis
+
+玩家 Redis 数据库。
+
+包含：
+- database-player-redis
+- (以及 [DatabasePlayer](#databaseplayer), [AlkaidRedis](#databasealkaidredis))
+
+---
+
+### Ptc
 
 Persistent Container。
 
 包含：
 - database-ptc
-- (以及 [Database](#database) 的所有模块)
+- (以及 [Database](#database))
 
 ---
 
-### DatabasePtcObject
+### PtcObject
 
 Persistent Container With Object。
 
 包含：
 - database-ptc-object
-- (以及 [Database](#database) 的所有模块)
+- (以及 [Database](#database))
 
 ---
 
@@ -342,4 +352,4 @@ Jexl 脚本环境。
 | BungeeCord  | `BungeeCord`  | 包含 BungeeCord 平台的启动项 |
 | Velocity    | `Velocity`    | 包含 Velocity 平台的启动项   |
 | AfyBroker   | `AfyBroker`   | 包含 AfyBroker 平台的启动项  |
-| Application | `Application` | 可独立运行的 Java 程序       |
+| Application | `App`         | 可独立运行的 Java 程序       |
