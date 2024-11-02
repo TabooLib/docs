@@ -8,7 +8,7 @@ sidebar_position: 1
 
 :::tip
 
-[TabooLib Repository](https://repo.tabooproject.org) 中已经包含了必要的核心文件，你可以直接使用。
+[TabooLib Repository](https://repo.tabooproject.org) 中已经包含了必要的核心文件，您可以直接使用。
 
 :::
 

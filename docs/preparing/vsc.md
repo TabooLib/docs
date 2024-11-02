@@ -10,4 +10,4 @@ TabooLibDocs 是基于一种叫做 [Markdown](https://www.markdownguide.org/) �
 
 VS Code 是一个开源的跨平台文本及源代码编辑器，由微软开发，在 MIT 许可证下发布。和一般的文本编辑器不同，VS Code 内建有调试、语法高亮、智能补全、代码重构等诸多功能。
 
-你可以在 https://code.visualstudio.com/ 免费下载。
+您可以在 https://code.visualstudio.com/ 免费下载。

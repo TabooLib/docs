@@ -18,13 +18,13 @@ Git 是一个开源的版本控制系统，它极大的方便了开发人员间�
 
 [GitHub Desktop](https://desktop.github.com/) 是一种在 macOS 上简便地安装 Git 的方式。
 
-如果你使用 [Homebrew](https://brew.sh/)，你可以通过以下命令安装: 
+如果您使用 [Homebrew](https://brew.sh/)，您可以通过以下命令安装: 
 
 ```bash
 brew install git
 ```
 
-如果你使用 [MacPorts](https://www.macports.org/)，你可以通过以下命令安装: 
+如果您使用 [MacPorts](https://www.macports.org/)，您可以通过以下命令安装: 
 
 ```bash
 port install git
@@ -32,11 +32,11 @@ port install git
 
 ### Linux 和 Unix 平台
 
-在 Linux 上安装 Git 的最简单方法是使用你的 Linux 发行版的包管理系统。
+在 Linux 上安装 Git 的最简单方法是使用您的 Linux 发行版的包管理系统。
 
 :::tip
 
-你也许需要在命令前加上 `sudo`。
+您也许需要在命令前加上 `sudo`。
 
 :::
 
@@ -84,13 +84,13 @@ pkgin install git
 
 ## 配置
 
-Git 的配置文件位于 `~/.gitconfig`，你可以使用任何文本编辑器打开它。
+Git 的配置文件位于 `~/.gitconfig`，您可以使用任何文本编辑器打开它。
 
 ```bash
 nano ~/.gitconfig
 ```
 
-如果你还没有配置过 Git，你可以使用下列命令来配置你的 Git。
+如果您还没有配置过 Git，您可以使用下列命令来配置您的 Git。
 
 ```bash
 git config --global user.name "Your Name"
@@ -99,13 +99,13 @@ git config --global user.email "your@email.com"
 
 :::tip
 
-你可以使用 `git config --global --list` 来查看你的配置。
+您可以使用 `git config --global --list` 来查看您的配置。
 
 :::
 
 ## 验证
 
-在终端中输入 `git --version`，如果你看到了 Git 的版本号，那么恭喜你，你已经成功安装了 Git。
+在终端中输入 `git --version`，如果您看到了 Git 的版本号，那么恭喜您，您已经成功安装了 Git。
 
 ```bash
 git --version
@@ -113,11 +113,11 @@ git --version
 
 ## 最后
 
-现在你已经安装了 Git，你可以开始使用它来管理你的项目了。
+现在您已经安装了 Git，您可以开始使用它来管理您的项目了。
 
 :::tip
 
-如果你想要了解更多关于 Git 的知识，你可以在 [Git 官方文档](https://git-scm.com/doc) 中找到更多的信息。
+如果您想要了解更多关于 Git 的知识，您可以在 [Git 官方文档](https://git-scm.com/doc) 中找到更多的信息。
 
 :::
 

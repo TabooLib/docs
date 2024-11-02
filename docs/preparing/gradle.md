@@ -36,7 +36,7 @@ brew install gradle
 
 :::tip
 
-你也许需要在命令前加上 `sudo`。
+您也许需要在命令前加上 `sudo`。
 
 :::
 

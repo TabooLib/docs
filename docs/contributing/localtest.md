@@ -6,7 +6,7 @@ sidebar_position: 1
 
 很多情况下，我们需要在本地测试 TabooLib 的功能，以便更好地理解它的工作原理。在这里，我们将介绍如何在本地搭建 TabooLib 的测试环境。
 
-从 [TabooLib 仓库](https://github.com/taboolib/taboolib) 中克隆完整项目在你的工作环境中。
+从 [TabooLib 仓库](https://github.com/taboolib/taboolib) 中克隆完整项目在您的工作环境中。
 
 ```bash
 git clone --depth=1 https://github.com/taboolib/taboolib
@@ -14,7 +14,7 @@ git clone --depth=1 https://github.com/taboolib/taboolib
 
 ## 构建 & 发布
 
-当对 TabooLib 代码进行改动后，你需要将其发布到 **本地仓库** 以便在其他项目中使用。
+当对 TabooLib 代码进行改动后，您需要将其发布到 **本地仓库** 以便在其他项目中使用。
 
 ```bash title="1. 构建并发布"
 gradlew publishMavenPublicationToMavenLocalRepository -PdevLocal

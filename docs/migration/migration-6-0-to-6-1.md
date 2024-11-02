@@ -32,7 +32,7 @@ plugins {
 
 ## 2. 迁移 TabooLib 配置
 
-在这之前，你的配置应该长这样：
+在这之前，您的配置应该长这样：
 
 ```kotlin title="build.gradle.kts (6.0)"
 taboolib {
@@ -94,7 +94,7 @@ taboolib {
 
 ## 3. 迁移 @Platform 注解
 
-如果你的项目中使用到例如 `@Platform` 注解，例如：
+如果您的项目中使用到例如 `@Platform` 注解，例如：
 
 ```kotlin
 @PlatformSide({Platform.BUKKIT, Platform.BUNGEE})
