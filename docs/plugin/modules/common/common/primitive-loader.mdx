@@ -1,0 +1,141 @@
+---
+id: primitive-loader
+sidebar_label: PrimitiveLoader
+---
+
+# PrimitiveLoader
+
+PrimitiveLoader 是 TabooLib 的原始加载器，负责加载 TabooLib 的核心模块和依赖。它必须在 IsolatedClassLoader 中加载，以确保隔离环境的正确性。
+
+## 主要功能
+
+### 初始化
+
+```java
+/**
+ * 初始化各模块
+ * 该方法必须在 IsolatedClassLoader 中运行，才能确保从 ClassAppender 初始化的 TabooLib 类为隔离状态
+ */
+public static void init() throws Throwable
+```
+
+这个方法是 PrimitiveLoader 的入口点，它会初始化 TabooLib 的核心模块和依赖。初始化过程包括：
+
+1. 加载基础依赖（如 jar-relocator、asm 等）
+2. 加载反射模块
+3. 加载完整模块
+
+### 加载模块
+
+```java
+/**
+ * 从仓库下载模块并加载
+ *
+ * @param repo       仓库地址
+ * @param group      组
+ * @param name       构件名
+ * @param version    版本
+ * @param isIsolated 是否进入沙盒
+ * @param isExternal 是否属于外部库（不会扫描类）
+ */
+static boolean load(String repo, String group, String name, String version, boolean isIsolated, boolean isExternal, List<String[]> relocate)
+```
+
+这个方法用于从仓库下载模块并加载。它会：
+
+1. 检查文件是否存在，如果不存在则下载
+2. 验证文件的完整性
+3. 加载文件到 ClassLoader 中
+
+### 加载文件
+
+```java
+/**
+ * 加载文件
+ *
+ * @param file          文件
+ * @param isIsolated    是否进入沙盒
+ * @param isExternal    是否属于外部库（不会扫描类）
+ * @param relocate      重定向规则
+ * @param forceRelocate 是否强制重定向
+ */
+static void loadFile(File file, boolean isIsolated, boolean isExternal, List<String[]> relocate, boolean forceRelocate) throws Throwable
+```
+
+这个方法用于加载文件到 ClassLoader 中。它会：
+
+1. 根据重定向规则对文件进行重定向
+2. 使用 ClassAppender 将文件加载到 ClassLoader 中
+3. 读取文件中的 `META-INF/taboolib/extra.properties` 配置，并执行其中定义的初始化方法
+
+## 重要常量
+
+```java
+/**
+ * TabooLib 的组 ID
+ */
+public static final String TABOOLIB_GROUP = "!io.izzel.taboolib".substring(1);
+
+/**
+ * TabooLib 的包名
+ */
+public static final String TABOOLIB_PACKAGE_NAME = "taboolib";
+
+/**
+ * TabooProject 的组 ID
+ */
+public static final String TABOOPROJECT_GROUP = "!org.tabooproject".substring(1);
+
+/**
+ * ASM 的组 ID
+ */
+public static final String ASM_GROUP = "!org.objectweb.asm".substring(1);
+
+/**
+ * JarRelocator 的组 ID
+ */
+public static final String JR_GROUP = "!me.lucko.jarrelocator".substring(1);
+```
+
+## 文件路径
+
+```java
+/**
+ * 获取缓存路径
+ */
+public static File getCacheFile()
+
+/**
+ * 获取文件保存路径
+ */
+public static File getLibraryFile()
+```
+
+## 使用示例
+
+PrimitiveLoader 通常不需要直接使用，它会在 TabooLib 初始化时自动加载。但如果需要手动加载模块，可以这样做：
+
+```java
+// 加载一个模块
+PrimitiveLoader.load(
+    PrimitiveSettings.REPO_CENTRAL,  // 仓库地址
+    "com.example",                   // 组 ID
+    "example-module",                // 构件名
+    "1.0.0",                         // 版本
+    true,                            // 是否隔离
+    false,                           // 是否外部库
+    new ArrayList<>()                // 重定向规则
+);
+```
+
+## 注意事项
+
+- PrimitiveLoader 必须在 IsolatedClassLoader 中加载，否则无法确保隔离环境的正确性。
+- 加载模块时，需要注意模块之间的依赖关系，确保按照正确的顺序加载。
+- 在开发模式下，PrimitiveLoader 会强制下载依赖，以确保使用最新的版本。
+
+:::tip
+
+本文由 Claude 3.7 生成。
+
+:::

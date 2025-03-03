@@ -1,0 +1,193 @@
+---
+id: data-conversion
+title: Data Conversion
+sidebar_label: Data Conversion
+---
+
+# 数据转换工具
+
+common-legacy-api 模块提供了强大的数据转换工具，可以轻松地在不同数据类型之间进行转换。
+
+## Coerce
+
+`Coerce` 类是从 SpongeAPI 移植过来的工具类，提供了将各种类型的对象转换为基本数据类型的方法。这个类在处理配置文件、命令参数等场景中非常有用。
+
+### 基本类型转换
+
+```java
+// 转换为整数
+int intValue = Coerce.toInteger("123"); // 返回 123
+int intFromDouble = Coerce.toInteger("123.45"); // 返回 123
+
+// 转换为长整数
+long longValue = Coerce.toLong("123456789"); // 返回 123456789L
+
+// 转换为双精度浮点数
+double doubleValue = Coerce.toDouble("3.14159"); // 返回 3.14159
+
+// 转换为单精度浮点数
+float floatValue = Coerce.toFloat("2.718"); // 返回 2.718f
+
+// 转换为短整数
+short shortValue = Coerce.toShort("32767"); // 返回 32767
+
+// 转换为字节
+byte byteValue = Coerce.toByte("127"); // 返回 127
+
+// 转换为字符
+char charValue = Coerce.toChar("A"); // 返回 'A'
+
+// 转换为布尔值
+boolean boolValue = Coerce.toBoolean("true"); // 返回 true
+boolean boolFromYes = Coerce.toBoolean("yes"); // 返回 true
+boolean boolFromOne = Coerce.toBoolean("1"); // 返回 true
+```
+
+### 高级类型转换
+
+```java
+// 转换为字符串
+String strValue = Coerce.toString(123); // 返回 "123"
+String strFromArray = Coerce.toString(new int[]{1, 2, 3}); // 返回 "[1, 2, 3]"
+
+// 转换为列表
+List<?> listValue = Coerce.toList("1,2,3"); // 返回 ["1", "2", "3"]
+List<?> listFromArray = Coerce.toList(new int[]{1, 2, 3}); // 返回 [1, 2, 3]
+
+// 转换为特定类型的列表
+List<Integer> intList = Coerce.toListOf("1,2,3", Integer.class); // 返回 [1, 2, 3]
+List<String> strList = Coerce.toListOf(new int[]{1, 2, 3}, String.class); // 返回 ["1", "2", "3"]
+
+// 转换为枚举
+enum TestEnum { ONE, TWO, THREE }
+TestEnum enumValue = Coerce.toEnum("ONE", TestEnum.class); // 返回 TestEnum.ONE
+TestEnum enumIgnoreCase = Coerce.toEnum("two", TestEnum.class); // 返回 TestEnum.TWO
+```
+
+### 格式化数字
+
+```java
+// 格式化双精度浮点数（默认保留2位小数）
+double formatted = Coerce.format(3.14159); // 返回 3.14
+
+// 格式化双精度浮点数（指定小数位数）
+double formatted3 = Coerce.format(3.14159, 3); // 返回 3.142
+
+// 格式化双精度浮点数（指定小数位数和舍入模式）
+double formattedDown = Coerce.format(3.14159, 3, BigDecimal.ROUND_DOWN); // 返回 3.141
+```
+
+### Optional 返回值
+
+除了直接转换方法外，Coerce 还提供了返回 Optional 的方法，这些方法在转换失败时会返回 Optional.empty()：
+
+```java
+// 尝试转换为整数
+Optional<Integer> optInt = Coerce.asInteger("123"); // 返回 Optional.of(123)
+Optional<Integer> optIntFail = Coerce.asInteger("abc"); // 返回 Optional.empty()
+
+// 尝试转换为布尔值
+Optional<Boolean> optBool = Coerce.asBoolean(true); // 返回 Optional.of(true)
+Optional<Boolean> optBoolFail = Coerce.asBoolean("maybe"); // 返回 Optional.empty()
+
+// 尝试转换为字符串
+Optional<String> optStr = Coerce.asString(123); // 返回 Optional.of("123")
+Optional<String> optStrNull = Coerce.asString(null); // 返回 Optional.empty()
+```
+
+## CoerceExtensions
+
+`CoerceExtensions` 为 Kotlin 提供了一系列扩展属性和函数，使 Coerce 的使用更加简洁。
+
+### 扩展属性
+
+```kotlin
+// 使用扩展属性进行类型转换
+val intValue = "123".cint // 等同于 Coerce.toInteger("123")
+val doubleValue = "3.14".cdouble // 等同于 Coerce.toDouble("3.14")
+val floatValue = "2.718".cfloat // 等同于 Coerce.toFloat("2.718")
+val longValue = "123456789".clong // 等同于 Coerce.toLong("123456789")
+val shortValue = "32767".cshort // 等同于 Coerce.toShort("32767")
+val byteValue = "127".cbyte // 等同于 Coerce.toByte("127")
+val charValue = "A".cchar // 等同于 Coerce.toChar("A")
+val boolValue = "true".cbool // 等同于 Coerce.toBoolean("true")
+```
+
+### 扩展函数
+
+```kotlin
+// 格式化双精度浮点数
+val formatted = 3.14159.format() // 默认保留2位小数，返回 3.14
+val formatted3 = 3.14159.format(3) // 保留3位小数，返回 3.142
+val formattedDown = 3.14159.format(3, BigDecimal.ROUND_DOWN) // 保留3位小数，向下舍入，返回 3.141
+
+// 格式化单精度浮点数
+val formattedFloat = 3.14159f.format() // 默认保留2位小数，返回 3.14f
+val formattedFloat3 = 3.14159f.format(3) // 保留3位小数，返回 3.142f
+```
+
+### 字符串比较扩展
+
+```kotlin
+// 忽略大小写比较字符串
+val isEqual = "hello".eqic("HELLO") // 返回 true
+```
+
+## 实际应用示例
+
+### 配置文件处理
+
+```kotlin
+// 从配置文件读取值并转换为适当的类型
+val config = /* 获取配置文件 */
+val damage = config.getString("weapon.damage").cdouble
+val cooldown = config.getString("weapon.cooldown").cint
+val enabled = config.getString("weapon.enabled").cbool
+
+// 格式化显示的数值
+val displayDamage = damage.format(1) // 保留1位小数
+```
+
+### 命令参数处理
+
+```kotlin
+// 处理命令参数
+fun onCommand(sender: CommandSender, args: Array<String>) {
+    if (args.isEmpty()) return
+    
+    // 转换参数
+    val amount = args.getOrNull(0)?.cint ?: 1
+    val multiplier = args.getOrNull(1)?.cdouble ?: 1.0
+    
+    // 使用转换后的参数
+    val result = amount * multiplier
+    sender.sendMessage("结果: ${result.format()}")
+}
+```
+
+### 物品属性处理
+
+```kotlin
+// 从物品 Lore 中提取属性值
+fun extractAttributes(lore: List<String>): Map<String, Double> {
+    val attributes = mutableMapOf<String, Double>()
+    
+    for (line in lore) {
+        // 使用正则表达式匹配属性行
+        val matcher = Pattern.compile("(.*?): (.*)").matcher(line)
+        if (matcher.find()) {
+            val name = matcher.group(1)
+            val value = matcher.group(2).cdouble
+            attributes[name] = value
+        }
+    }
+    
+    return attributes
+}
+```
+
+:::tip
+
+本文由 Claude 3.7 生成。
+
+:::

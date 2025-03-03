@@ -6,11 +6,11 @@ slug: /plugin/modules/common
 
 # common
 
-TabooLib 的加载器，负责环境部署，是核心部分。 
+TabooLib 的加载器，负责环境部署，是核心部分。本模块包含了 TabooLib 的基础组件，如生命周期管理、类加载、平台适配等。
 
 ## `TabooLib`
 
-TabooLib 的入口类，主要包含一些生命周期方法。
+TabooLib 的入口类，主要包含生命周期管理、类加载和环境检测等功能。
 
 **注册生命周期任务**
 
@@ -24,7 +24,7 @@ TabooLib 的入口类，主要包含一些生命周期方法。
 public static void registerLifeCycleTask(LifeCycle lifeCycle, int priority, Runnable runnable)
 ```
 
-**获取一些信息**
+**生命周期相关方法**
 
 ```java
 /**
@@ -36,6 +36,62 @@ public static boolean isStopped()
   * 停止 TabooLib 及插件加载流程
   */
 public static void setStopped(boolean value)
+
+/**
+  * 获取当前生命周期
+  */
+public static LifeCycle getCurrentLifeCycle()
+
+/**
+  * 执行生命周期任务
+  */
+public static void lifeCycle(LifeCycle lifeCycle)
+```
+
+**环境检测方法**
+
+```java
+/**
+  * 检查当前 Kotlin 环境是否有效
+  */
+public static boolean isKotlinEnvironment()
+
+/**
+  * 检查当前 Kotlin Coroutines 环境是否有效
+  */
+public static boolean isKotlinCoroutinesEnvironment()
+```
+
+**类加载相关方法**
+
+```java
+/**
+  * 获取类
+  * 由于 Paper 1.20.6+ 会在运行时修改字节码以接管插件的 Class.forName 调用，
+  * 因此 TabooLib 的外部模块均需要通过此方法获取类，以借助 Paper 的重定向机制。
+  */
+public static Class<?> getClass(String name) throws ClassNotFoundException
+
+/**
+  * 获取类
+  * 逆天 Paper，这俩玩意儿反而不接管，想不明白。
+  */
+public static Class<?> getClass(String name, boolean initialize) throws ClassNotFoundException
+
+/**
+  * 获取类
+  */
+public static Class<?> getClass(String name, boolean initialize, ClassLoader classLoader) throws ClassNotFoundException
+
+/**
+  * 设置类查找器
+  */
+public static void setClassFinder(ClassFinder classFinder)
+
+/**
+  * 获取类查找器
+  */
+public static ClassFinder getClassFinder()
 
 /**
   * 获取当前插件所有被唤醒的类
@@ -58,7 +114,62 @@ public static final Properties RUNTIME_PROPERTIES
   */
 public static final Properties VERSION_PROPERTIES
 
-...
+/**
+  * Kotlin 版本
+  */
+public static final String KOTLIN_VERSION
+
+/**
+  * Kotlinx 版本
+  */
+public static final String KOTLIN_COROUTINES_VERSION
+
+/**
+  * TabooLib 版本
+  */
+public static final String TABOOLIB_VERSION
+
+/**
+  * 跳过 Kotlin 重定向
+  */
+public static final boolean SKIP_KOTLIN_RELOCATE
+
+/**
+  * 跳过 TabooLib 重定向
+  */
+public static final boolean SKIP_TABOOLIB_RELOCATE
+
+/**
+  * 开发模式
+  * 开发模式会强制下载依赖
+  */
+public static final boolean IS_DEV_MODE
+
+/**
+  * 调试模式
+  * 开发模式下默认开启调试模式
+  */
+public static final boolean IS_DEBUG_MODE
+
+/**
+  * 是否在开发模式强制下载依赖
+  */
+public static final boolean IS_FORCE_DOWNLOAD_IN_DEV_MODE
+
+/**
+  * 中央仓库
+  */
+public static final String REPO_CENTRAL
+
+/**
+  * TabooLib 仓库
+  */
+public static final String REPO_TABOOLIB
+
+/**
+  * Reflex 仓库（一般不会修改）
+  */
+public static final String REPO_REFLEX
 ```
 
 ## `Plugin`
@@ -74,6 +185,25 @@ object MyPlugin : Plugin() {
 
   override fun onEnable() {
     // 插件启用时执行
+  }
+
+  override fun onActive() {
+    // 服务器启动完成时执行
+  }
+
+  override fun onDisable() {
+    // 插件卸载时执行
+  }
+
+  override fun nativeJarFile(): File? {
+    // 重定向插件文件（用于改变 TabooLib 逻辑）
+    return null
+  }
+
+  override fun nativeDataFolder(): File? {
+    // 重定向插件目录（用于改变 TabooLib 逻辑）
+    return null
+  }
 }
 ```
 
@@ -92,5 +222,30 @@ object BukkitListener {
   fun onPlayerJoin(event: PlayerJoinEvent) {
     // 玩家加入时执行
   }
+}
+```
+
+## `Platform`
+
+平台枚举，用于定义不同的运行平台。
+
+```java
+public enum Platform {
+
+    BUKKIT("Bukkit", "org.bukkit.Bukkit"),
+    BUNGEE("Bungee", "net.md_5.bungee.BungeeCord"),
+    VELOCITY("Velocity", "com.velocitypowered.api.plugin.Plugin"),
+    AFYBROKER("AfyBroker", "net.afyer.afybroker.server.Broker"),
+    APPLICATION("Application", null);
+
+    /**
+      * 当前运行平台
+      */
+    public static final Platform CURRENT = current();
+
+    /**
+      * 获取属于 Minecraft 的平台类型
+      */
+    public static Platform[] minecraft();
 }
 ```

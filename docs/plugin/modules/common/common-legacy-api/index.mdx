@@ -6,4 +6,147 @@ slug: /plugin/modules/common-legacy-api
 
 # common-legacy-api
 
-TabooLib 5.0 版本保留下来的一些工具。
+TabooLib 5.0 版本保留下来的一些工具。这个模块包含了许多实用的工具类，可以帮助开发者更高效地完成各种常见任务。
+
+## 模块概述
+
+common-legacy-api 模块提供了以下几类工具：
+
+- **数据转换工具**：提供各种类型之间的转换功能
+- **时间相关工具**：处理时间周期、实时时间计算和时间解析
+- **字符串处理工具**：提供字符串操作、编码和解析功能
+- **集合工具**：提供带权重的随机列表等功能
+- **文件监控工具**：监控文件变化并执行相应操作
+- **游戏相关工具**：提供冷却系统、经验等级处理和物品描述映射等功能
+- **其他工具**：提供四元数、命令参数解析等功能
+
+## 详细文档
+
+为了更好地了解各个工具的用法，请参考以下详细文档：
+
+- [数据转换工具](./data-conversion)：详细介绍 Coerce 和 CoerceExtensions 的用法
+- [时间工具](./time-tools)：详细介绍 TimeCycle、RealTime、String2Time 等时间相关工具的用法
+- [游戏工具](./game-tools)：详细介绍 Baffle、Level、LoreMap 等游戏相关工具的用法
+
+## 快速入门
+
+以下是一些常用工具的简单示例：
+
+### 数据转换工具
+
+```java
+// 将字符串转换为整数
+int value = Coerce.toInteger("123"); // 返回 123
+
+// 将字符串转换为布尔值
+boolean flag = Coerce.toBoolean("yes"); // 返回 true
+
+// 将对象转换为列表
+List<?> list = Coerce.toList("1,2,3"); // 返回 [1, 2, 3]
+
+// 格式化小数
+double formatted = Coerce.format(3.14159, 2); // 返回 3.14
+```
+
+### 时间相关工具
+
+```java
+// 创建基于时间的周期
+TimeCycle timeCycle = new TimeCycle(3600000); // 1小时的毫秒数
+
+// 创建每天特定时间的周期
+TimeCycle dailyCycle = new TimeCycle(14, 30); // 每天14:30
+
+// 解析时间字符串为毫秒数
+long millis = "1d2h30m".parseMillis(); // 1天2小时30分钟的毫秒数
+```
+
+### 字符串处理工具
+
+```kotlin
+// 编码字符串为 Base64
+val encoded = "Hello, World!".encodeBase64()
+
+// 解码 Base64 字符串
+val decoded = encoded.decodeBase64()
+
+// 替换多个字符串对
+val replaced = "Hello, World!".replace("Hello" to "Hi", "World" to "Earth") // 返回 "Hi, Earth!"
+```
+
+### 集合工具
+
+```kotlin
+// 创建随机列表
+val randomList = RandomList(
+    "Common" to 70,
+    "Rare" to 20,
+    "Epic" to 9,
+    "Legendary" to 1
+)
+
+// 随机获取一个元素
+val item = randomList.random()
+```
+
+### 文件监控工具
+
+```java
+// 添加文件监听器
+FileWatcher.INSTANCE.addSimpleListener(new File("config.yml"), file -> {
+    // 文件变化时执行的操作
+    System.out.println("File changed: " + file.getName());
+});
+```
+
+### 游戏相关工具
+
+> **注意**：`Baffle` 是一个过时的工具类，它在内部使用 `ConcurrentHashMap` 存储数据，但没有提供自动清理机制。必须在玩家离开游戏时调用 `reset(playerId)` 方法来释放缓存，否则会导致内存泄漏。详情请参阅 [游戏工具](./game-tools) 文档。
+
+```java
+// 创建基于时间的冷却器（5秒）
+Baffle timeBaffle = Baffle.of(5, TimeUnit.SECONDS);
+
+// 检查是否可以执行操作
+if (timeBaffle.hasNext("player1")) {
+    // 可以执行操作
+    System.out.println("Action executed for player1");
+}
+
+// 玩家退出时必须释放缓存
+timeBaffle.reset("player1");
+
+// 设置玩家的总经验值
+Level.setTotalExperience(player, 1000);
+
+// 创建 LoreMap
+LoreMap<String> loreMap = new LoreMap<>(true, true, true);
+loreMap.put("物理伤害", "PHYSICAL");
+```
+
+### 其他工具
+
+```java
+// 创建四元数
+Quat position = Quat.at(1.0, 2.0, 3.0);
+
+// 解析命令参数
+Demand demand = new Demand("command -a value1 -b value2 --tag1 --tag2 arg1 arg2");
+String arg1 = demand.get(0); // "arg1"
+```
+
+## 依赖关系
+
+common-legacy-api 模块依赖以下外部库：
+
+```kotlin
+@Inject
+@RuntimeDependencies(
+    RuntimeDependency(value = "!com.google.code.gson:gson:2.8.8", test = "!com.google.gson.JsonElement"),
+    RuntimeDependency(value = "!com.google.guava:guava:21.0", test = "!com.google.common.base.Optional"),
+    RuntimeDependency(value = "!org.apache.commons:commons-lang3:3.5", test = "!org.apache.commons.lang3.concurrent.BasicThreadFactory")
+)
+object Common5
+```
+
+这些依赖会在运行时自动加载，无需在项目中手动添加。

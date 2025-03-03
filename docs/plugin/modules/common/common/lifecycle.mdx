@@ -1,0 +1,107 @@
+---
+id: lifecycle
+sidebar_label: LifeCycle
+---
+
+# LifeCycle
+
+TabooLib 的生命周期枚举，用于定义插件在不同阶段的生命周期。
+
+```java
+public enum LifeCycle {
+
+    /**
+     * 未启动
+     */
+    NONE,
+
+    /**
+     * 插件初始化（静态代码块被执行时）时
+     **/
+    CONST,
+
+    /**
+     * 插件主类被实例化时
+     **/
+    INIT,
+
+    /**
+     * 插件加载时
+     **/
+    LOAD,
+
+    /**
+     * 插件启用时
+     **/
+    ENABLE,
+
+    /**
+     * 服务器完全启动（调度器启动）时
+     **/
+    ACTIVE,
+
+    /**
+     * 插件卸载时
+     **/
+    DISABLE
+}
+```
+
+## 生命周期任务
+
+TabooLib 允许通过 `TabooLib.registerLifeCycleTask()` 方法注册生命周期任务，这些任务会在特定的生命周期阶段执行。
+
+```java
+/**
+ * 推迟任务到指定生命周期下执行，如果生命周期已经过去则立即执行
+ *
+ * @param lifeCycle 生命周期
+ * @param priority  优先级（数值越小越先执行）
+ * @param runnable  任务
+ */
+public static void registerLifeCycleTask(LifeCycle lifeCycle, int priority, Runnable runnable)
+```
+
+## LifeCycleTask 接口
+
+生命周期任务接口，用于定义生命周期任务的优先级和执行逻辑。
+
+```java
+public interface LifeCycleTask {
+
+    /**
+     * 优先级（生序排列）
+     */
+    int priority();
+
+    /**
+     * 运行
+     */
+    void run();
+}
+```
+
+## 使用示例
+
+```kotlin
+// 在 ENABLE 生命周期注册一个优先级为 0 的任务
+TabooLib.registerLifeCycleTask(LifeCycle.ENABLE, 0) {
+    println("插件启用时执行，优先级为 0")
+}
+
+// 在 ENABLE 生命周期注册一个优先级为 1 的任务
+TabooLib.registerLifeCycleTask(LifeCycle.ENABLE, 1) {
+    println("插件启用时执行，优先级为 1，会在优先级为 0 的任务之后执行")
+}
+
+// 在 DISABLE 生命周期注册一个任务
+TabooLib.registerLifeCycleTask(LifeCycle.DISABLE, 0) {
+    println("插件卸载时执行")
+}
+```
+
+:::tip
+
+本文由 Claude 3.7 生成。
+
+:::

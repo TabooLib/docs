@@ -1,0 +1,180 @@
+---
+id: primitive-io
+sidebar_label: PrimitiveIO
+---
+
+# PrimitiveIO
+
+PrimitiveIO 是 TabooLib 的 IO 工具类，提供了文件读写、哈希计算、日志输出等功能。它是 TabooLib 的基础工具类之一，被广泛用于 TabooLib 的其他模块中。
+
+## 日志输出
+
+```java
+/**
+ * 调试模式输出
+ */
+public static void debug(Object message, Object... args)
+
+/**
+ * 控制台输出
+ */
+public static void println(Object message, Object... args)
+
+/**
+ * 警告输出
+ */
+public static void warning(Object message, Object... args)
+
+/**
+ * 错误输出
+ */
+public static void error(Object message, Object... args)
+```
+
+这些方法用于在控制台输出不同级别的日志信息。其中 `debug` 方法只有在调试模式下才会输出信息。
+
+## 文件操作
+
+```java
+/**
+ * 验证文件完整性
+ *
+ * @param file     文件
+ * @param hashFile 哈希文件
+ */
+public static boolean validation(File file, File hashFile)
+
+/**
+ * 读取文件内容
+ */
+public static String readFile(File file)
+
+/**
+ * 从 InputStream 读取全部内容
+ *
+ * @param inputStream 输入流
+ * @param charset     编码
+ */
+public static String readFully(InputStream inputStream, Charset charset) throws IOException
+
+/**
+ * 从 InputStream 读取全部内容
+ *
+ * @param inputStream 输入流
+ */
+public static byte[] readFully(InputStream inputStream) throws IOException
+
+/**
+ * 通过 FileChannel 复制文件
+ */
+public static File copyFile(File from, File to)
+
+/**
+ * 下载文件
+ *
+ * @param url 地址
+ * @param out 目标文件
+ */
+public static void downloadFile(URL url, File out) throws IOException
+```
+
+这些方法提供了文件的读取、复制、下载等功能。其中 `validation` 方法用于验证文件的完整性，它会检查文件是否存在，并且哈希文件的内容是否与文件的哈希值匹配。
+
+## 哈希计算
+
+```java
+/**
+ * 获取文件哈希，使用 sha-1 算法
+ */
+public static String getHash(File file)
+
+/**
+ * 获取字符串哈希
+ */
+public static String getHash(String data)
+
+/**
+ * 将字节数组转换为十六进制字符串
+ */
+public static String bytesToHex(byte[] bytes)
+```
+
+这些方法用于计算文件或字符串的哈希值，使用的是 SHA-1 算法。
+
+## 国际化支持
+
+```java
+/**
+ * 当前运行的文件名
+ **/
+private static String runningFileName = "TabooLib";
+
+/**
+ * 是否为中文环境
+ * 如果在获取的时候发生异常，默认视为中文环境
+ */
+private static boolean isChineseEnvironment = true;
+
+/**
+ * 获取当前运行的文件名
+ */
+public static String getRunningFileName()
+
+/**
+ * 判断是否为中文环境
+ */
+public static boolean isChineseEnvironment()
+
+/**
+ * 针对中文环境进行特殊适配，以支持在中文环境中输出本土化的提示信息。
+ * 其他语言环境均输出英文。
+ */
+public static String t(String zh, String en)
+```
+
+这些方法提供了国际化支持，可以根据当前环境的语言输出相应的提示信息。`t` 方法是一个便捷的工具，可以根据当前环境是否为中文环境来选择输出中文或英文信息。
+
+## 使用示例
+
+```java
+// 输出日志
+PrimitiveIO.println("这是一条普通日志");
+PrimitiveIO.warning("这是一条警告日志");
+PrimitiveIO.error("这是一条错误日志");
+PrimitiveIO.debug("这是一条调试日志，只有在调试模式下才会显示");
+
+// 读取文件
+File file = new File("config.yml");
+String content = PrimitiveIO.readFile(file);
+System.out.println("文件内容: " + content);
+
+// 复制文件
+File from = new File("source.txt");
+File to = new File("target.txt");
+PrimitiveIO.copyFile(from, to);
+
+// 下载文件
+URL url = new URL("https://example.com/file.zip");
+File out = new File("downloaded.zip");
+PrimitiveIO.downloadFile(url, out);
+
+// 计算哈希
+String hash = PrimitiveIO.getHash(file);
+System.out.println("文件哈希: " + hash);
+
+// 国际化支持
+String message = PrimitiveIO.t("这是中文消息", "This is English message");
+System.out.println(message);
+```
+
+## 注意事项
+
+- 在使用 `debug` 方法时，需要确保 `PrimitiveSettings.IS_DEBUG_MODE` 为 `true`，否则不会输出任何信息。
+- 在使用 `downloadFile` 方法时，需要确保网络连接正常，否则会抛出 IOException。
+- 在使用 `validation` 方法时，需要确保哈希文件的内容是文件的哈希值，否则验证会失败。
+
+:::tip
+
+本文由 Claude 3.7 生成。
+
+:::

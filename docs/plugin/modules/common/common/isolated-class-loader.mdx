@@ -1,0 +1,170 @@
+---
+id: isolated-class-loader
+sidebar_label: IsolatedClassLoader
+---
+
+# IsolatedClassLoader
+
+IsolatedClassLoader 是 TabooLib 的隔离类加载器，用于将 TabooLib 的类与插件的类隔离开来，避免类加载冲突。它继承自 URLClassLoader，并重写了 loadClass 方法来实现类的隔离加载。
+
+## 主要功能
+
+### 初始化
+
+```java
+/**
+ * 初始化隔离类加载器
+ *
+ * @param clazz 插件主类
+ */
+public static void init(Class<?> clazz)
+```
+
+这个静态方法用于初始化隔离类加载器。它会创建一个新的 IsolatedClassLoader 实例，并将其赋值给 INSTANCE 静态变量。然后，它会加载 PrimitiveLoader 类并调用其 init 方法来初始化 TabooLib 的核心模块。
+
+### 构造函数
+
+```java
+/**
+ * 创建一个隔离类加载器
+ *
+ * @param clazz 插件主类
+ */
+public IsolatedClassLoader(Class<?> clazz)
+
+/**
+ * 创建一个隔离类加载器
+ *
+ * @param urls   URL 数组
+ * @param parent 父类加载器
+ */
+public IsolatedClassLoader(URL[] urls, ClassLoader parent)
+```
+
+这些构造函数用于创建一个新的 IsolatedClassLoader 实例。第一个构造函数会使用插件主类的 CodeSource 作为 URL，并将插件主类的类加载器作为父类加载器。第二个构造函数允许指定 URL 数组和父类加载器。
+
+### 类加载
+
+```java
+/**
+ * 加载类
+ *
+ * @param name   类名
+ * @param resolve 是否解析
+ */
+@Override
+protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException
+
+/**
+ * 加载类
+ *
+ * @param name         类名
+ * @param resolve      是否解析
+ * @param checkParents 是否检查父类加载器
+ */
+public Class<?> loadClass(String name, boolean resolve, boolean checkParents) throws ClassNotFoundException
+```
+
+这些方法用于加载类。IsolatedClassLoader 重写了 loadClass 方法，以实现类的隔离加载。它会首先检查类是否已经加载，然后检查类是否在排除列表中。如果类不在排除列表中，它会尝试从自己的 URL 中加载类。如果加载失败，并且 checkParents 为 true，它会尝试从父类加载器中加载类。
+
+### 排除类和包
+
+```java
+/**
+ * 添加排除类
+ *
+ * @param name 类名
+ */
+public void addExcludedClass(String name)
+
+/**
+ * 添加排除类集合
+ *
+ * @param names 类名集合
+ */
+public void addExcludedClasses(Collection<String> names)
+
+/**
+ * 添加排除包
+ *
+ * @param name 包名
+ */
+public void addExcludedPackage(String name)
+
+/**
+ * 添加排除包集合
+ *
+ * @param names 包名集合
+ */
+public void addExcludedPackages(Collection<String> names)
+```
+
+这些方法用于添加排除类和包。排除的类和包不会被 IsolatedClassLoader 加载，而是由父类加载器加载。这样可以避免类加载冲突。
+
+## 静态变量
+
+```java
+/**
+ * 当前项目正在使用的加载器
+ * 由 "插件主类" 初始化
+ */
+public static IsolatedClassLoader INSTANCE;
+```
+
+这个静态变量保存了当前项目正在使用的 IsolatedClassLoader 实例。它由插件主类初始化。
+
+## IsolatedClassLoaderConfig 接口
+
+```java
+public interface IsolatedClassLoaderConfig {
+    
+    /**
+     * 获取排除类列表
+     */
+    default Set<String> excludedClasses() {
+        return Collections.emptySet();
+    }
+    
+    /**
+     * 获取排除包列表
+     */
+    default Set<String> excludedPackages() {
+        return Collections.emptySet();
+    }
+}
+```
+
+这个接口用于配置 IsolatedClassLoader 的排除类和包。实现这个接口的类可以通过 SPI 机制被 IsolatedClassLoader 加载，从而自定义排除类和包。
+
+## 使用示例
+
+```java
+// 初始化隔离类加载器
+IsolatedClassLoader.init(YourPlugin.class);
+
+// 添加排除类
+IsolatedClassLoader.INSTANCE.addExcludedClass("com.example.ExcludedClass");
+
+// 添加排除包
+IsolatedClassLoader.INSTANCE.addExcludedPackage("com.example.excluded");
+
+// 加载类
+try {
+    Class<?> clazz = IsolatedClassLoader.INSTANCE.loadClass("com.example.YourClass", true);
+    // 使用加载的类
+} catch (ClassNotFoundException e) {
+    e.printStackTrace();
+}
+```
+
+## 注意事项
+
+- IsolatedClassLoader 是 TabooLib 的核心组件，通常不需要直接使用。它会在 TabooLib 初始化时自动创建和配置。
+- 在使用 IsolatedClassLoader 时，需要注意类的加载顺序和依赖关系，避免出现类加载冲突。
+- 排除的类和包不会被 IsolatedClassLoader 加载，而是由父类加载器加载。这样可以避免类加载冲突，但也可能导致类版本不一致的问题。
+
+:::tip
+
+本文由 Claude 3.7 生成。
+
+:::

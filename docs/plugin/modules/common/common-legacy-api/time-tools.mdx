@@ -1,0 +1,352 @@
+---
+id: time-tools
+title: Time Tools
+sidebar_label: Time Tools
+---
+
+# 时间工具
+
+common-legacy-api 模块提供了一系列处理时间的工具，包括时间周期、实时时间计算以及字符串时间解析等功能。
+
+## TimeCycle
+
+`TimeCycle` 是一个用于处理周期性时间的类，支持基于时间间隔、每天固定时间、每周固定时间和每月固定时间的周期。
+
+### 基本用法
+
+```java
+// 创建基于时间间隔的周期（毫秒）
+TimeCycle intervalCycle = new TimeCycle(3600000); // 1小时的毫秒数
+
+// 创建每天固定时间的周期
+TimeCycle dailyCycle = new TimeCycle(14, 30); // 每天14:30
+
+// 创建每周固定时间的周期
+TimeCycle weeklyCycle = new TimeCycle(TimeCycle.Type.WEEK, 2, 12, 0); // 每周二12:00
+
+// 创建每月固定时间的周期
+TimeCycle monthlyCycle = new TimeCycle(TimeCycle.Type.MONTH, 15, 8, 0); // 每月15日8:00
+```
+
+### 检查超时
+
+```java
+// 设置开始时间
+long startTime = System.currentTimeMillis();
+TimeCycle cycle = new TimeCycle(3600000); // 1小时
+cycle.start(startTime);
+
+// 检查是否超时
+if (cycle.isTimeout()) {
+    // 已经超过了1小时
+    System.out.println("Time cycle has timed out");
+}
+
+// 对于基于时间间隔的周期，也可以直接传入开始时间
+if (cycle.isTimeout(startTime)) {
+    // 已经超过了1小时
+    System.out.println("Time cycle has timed out");
+}
+```
+
+### 检查时间相等
+
+```java
+// 创建每天固定时间的周期
+TimeCycle dailyCycle = new TimeCycle(14, 30); // 每天14:30
+
+// 检查当前时间是否正好是14:30
+if (dailyCycle.isEquals()) {
+    // 当前时间是14:30
+    System.out.println("It's exactly 14:30 now");
+}
+```
+
+### 获取周期信息
+
+```java
+TimeCycle cycle = new TimeCycle(TimeCycle.Type.WEEK, 2, 12, 0); // 每周二12:00
+
+// 获取周期类型
+TimeCycle.Type type = cycle.getType(); // TimeCycle.Type.WEEK
+
+// 获取日期（对于周期类型为WEEK时表示星期几，1-7，对于MONTH表示日期，1-31）
+int day = cycle.getDay(); // 2
+
+// 获取小时
+int hour = cycle.getHour(); // 12
+
+// 获取分钟
+int minute = cycle.getMinute(); // 0
+
+// 获取时间间隔（仅对Type.TIME有效）
+long time = cycle.getTime();
+```
+
+## RealTime
+
+`RealTime` 是一个枚举类，用于计算下一个时间周期的开始时间。它支持两种不同的周计算方式：以周日为一周的开始（START_IN_SUNDAY）或以周一为一周的开始（START_IN_MONDAY）。
+
+### 基本用法
+
+```java
+// 获取下一个小时的开始时间
+long nextHour = RealTime.START_IN_SUNDAY.nextTime(RealTime.Type.HOUR, 1);
+
+// 获取下一天的开始时间
+long nextDay = RealTime.START_IN_SUNDAY.nextTime(RealTime.Type.DAY, 1);
+
+// 获取下一周的开始时间（周日为一周的开始）
+long nextWeekSunday = RealTime.START_IN_SUNDAY.nextTime(RealTime.Type.WEEK, 1);
+
+// 获取下一周的开始时间（周一为一周的开始）
+long nextWeekMonday = RealTime.START_IN_MONDAY.nextTime(RealTime.Type.WEEK, 1);
+
+// 获取下两个小时的开始时间
+long next2Hours = RealTime.START_IN_SUNDAY.nextTime(RealTime.Type.HOUR, 2);
+
+// 获取下两天的开始时间
+long next2Days = RealTime.START_IN_SUNDAY.nextTime(RealTime.Type.DAY, 2);
+
+// 获取下两周的开始时间
+long next2Weeks = RealTime.START_IN_SUNDAY.nextTime(RealTime.Type.WEEK, 2);
+```
+
+### 实际应用
+
+```java
+// 计算下一个整点的时间戳
+long nextHour = RealTime.START_IN_SUNDAY.nextTime(RealTime.Type.HOUR, 1);
+Date nextHourDate = new Date(nextHour);
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+System.out.println("下一个整点时间: " + sdf.format(nextHourDate));
+
+// 计算下一天0点的时间戳
+long nextDay = RealTime.START_IN_SUNDAY.nextTime(RealTime.Type.DAY, 1);
+Date nextDayDate = new Date(nextDay);
+System.out.println("下一天0点时间: " + sdf.format(nextDayDate));
+
+// 计算下一周日0点的时间戳
+long nextWeek = RealTime.START_IN_SUNDAY.nextTime(RealTime.Type.WEEK, 1);
+Date nextWeekDate = new Date(nextWeek);
+System.out.println("下一周日0点时间: " + sdf.format(nextWeekDate));
+
+// 计算下一周一0点的时间戳
+long nextWeekMonday = RealTime.START_IN_MONDAY.nextTime(RealTime.Type.WEEK, 1);
+Date nextWeekMondayDate = new Date(nextWeekMonday);
+System.out.println("下一周一0点时间: " + sdf.format(nextWeekMondayDate));
+```
+
+## String2Time
+
+`String2Time` 提供了从字符串解析时间跨度的功能，支持天(d)、小时(h)、分钟(m)和秒(s)的单位。
+
+### 基本用法
+
+```kotlin
+// 解析时间字符串为毫秒数
+val oneDay = "1d".parseMillis() // 1天的毫秒数：86400000
+val oneHour = "1h".parseMillis() // 1小时的毫秒数：3600000
+val oneMinute = "1m".parseMillis() // 1分钟的毫秒数：60000
+val oneSecond = "1s".parseMillis() // 1秒的毫秒数：1000
+
+// 解析复合时间字符串
+val complex = "1d2h30m15s".parseMillis() // 1天2小时30分钟15秒的毫秒数
+
+// 支持小数
+val halfDay = "0.5d".parseMillis() // 半天的毫秒数：43200000
+val quarterHour = "0.25h".parseMillis() // 15分钟的毫秒数：900000
+```
+
+### 实际应用
+
+```kotlin
+// 计算冷却时间
+val cooldownTime = "5m".parseMillis() // 5分钟的冷却时间
+val lastUsed = System.currentTimeMillis()
+val canUseAgain = lastUsed + cooldownTime
+
+// 计算任务持续时间
+val taskDuration = "2h30m".parseMillis() // 2小时30分钟的任务持续时间
+val taskStarted = System.currentTimeMillis()
+val taskEnds = taskStarted + taskDuration
+
+// 设置临时权限持续时间
+val permissionDuration = "7d".parseMillis() // 7天的权限持续时间
+val permissionGranted = System.currentTimeMillis()
+val permissionExpires = permissionGranted + permissionDuration
+```
+
+## String2TimeCycle
+
+`String2TimeCycle` 提供了从字符串解析时间周期的功能，支持 day、week、month 和时间间隔格式。
+
+### 基本用法
+
+```kotlin
+// 解析每天固定时间的周期
+val dailyCycle = "day 14 30".parseTimeCycle() // 每天14:30
+
+// 解析每周固定时间的周期
+val weeklyCycle = "week 1 12 0".parseTimeCycle() // 每周一12:00
+
+// 解析每月固定时间的周期
+val monthlyCycle = "month 15 8 0".parseTimeCycle() // 每月15日8:00
+
+// 解析时间间隔的周期
+val intervalCycle = "1h".parseTimeCycle() // 1小时的时间周期
+val complexCycle = "1d2h30m".parseTimeCycle() // 1天2小时30分钟的时间周期
+```
+
+### 实际应用
+
+```kotlin
+// 解析配置文件中的时间周期
+val configValue = config.getString("reset-cycle")
+val resetCycle = configValue.parseTimeCycle()
+
+// 检查是否到达重置时间
+val now = System.currentTimeMillis()
+if (resetCycle.start(now).isTimeout()) {
+    // 执行重置操作
+    println("执行重置操作")
+}
+
+// 定时任务
+val taskCycle = "day 0 0".parseTimeCycle() // 每天0点
+val taskStart = System.currentTimeMillis()
+if (taskCycle.start(taskStart).isTimeout()) {
+    // 执行每日任务
+    println("执行每日任务")
+}
+```
+
+## 组合使用示例
+
+### 定时任务系统
+
+```kotlin
+class TaskScheduler {
+    private val tasks = mutableMapOf<String, ScheduledTask>()
+    
+    fun scheduleTask(id: String, cycleStr: String, action: () -> Unit) {
+        val cycle = cycleStr.parseTimeCycle()
+        val task = ScheduledTask(id, cycle, action)
+        tasks[id] = task
+    }
+    
+    fun checkTasks() {
+        val now = System.currentTimeMillis()
+        tasks.values.forEach { task ->
+            if (task.shouldRun(now)) {
+                task.run()
+            }
+        }
+    }
+    
+    class ScheduledTask(val id: String, val cycle: TimeCycle, val action: () -> Unit) {
+        private var lastRun = 0L
+        
+        fun shouldRun(now: Long): Boolean {
+            if (lastRun == 0L) {
+                lastRun = now
+                return false
+            }
+            
+            return cycle.start(lastRun).isTimeout()
+        }
+        
+        fun run() {
+            action()
+            lastRun = System.currentTimeMillis()
+        }
+    }
+}
+
+// 使用示例
+val scheduler = TaskScheduler()
+
+// 每天0点执行
+scheduler.scheduleTask("daily-reset", "day 0 0") {
+    println("执行每日重置")
+}
+
+// 每周一12点执行
+scheduler.scheduleTask("weekly-reward", "week 1 12 0") {
+    println("发放每周奖励")
+}
+
+// 每小时执行
+scheduler.scheduleTask("hourly-check", "1h") {
+    println("执行每小时检查")
+}
+
+// 在主循环中定期检查任务
+while (true) {
+    scheduler.checkTasks()
+    Thread.sleep(1000) // 每秒检查一次
+}
+```
+
+### 冷却系统
+
+```kotlin
+class CooldownManager {
+    private val cooldowns = mutableMapOf<String, Long>()
+    
+    fun setCooldown(id: String, duration: String) {
+        val millis = duration.parseMillis()
+        cooldowns[id] = System.currentTimeMillis() + millis
+    }
+    
+    fun isOnCooldown(id: String): Boolean {
+        val expireTime = cooldowns[id] ?: return false
+        return System.currentTimeMillis() < expireTime
+    }
+    
+    fun getRemainingTime(id: String): Long {
+        val expireTime = cooldowns[id] ?: return 0
+        val remaining = expireTime - System.currentTimeMillis()
+        return if (remaining > 0) remaining else 0
+    }
+    
+    fun formatRemainingTime(id: String): String {
+        val remaining = getRemainingTime(id)
+        val seconds = remaining / 1000
+        val minutes = seconds / 60
+        val hours = minutes / 60
+        val days = hours / 24
+        
+        return when {
+            days > 0 -> "${days}天${hours % 24}小时"
+            hours > 0 -> "${hours}小时${minutes % 60}分钟"
+            minutes > 0 -> "${minutes}分钟${seconds % 60}秒"
+            else -> "${seconds}秒"
+        }
+    }
+}
+
+// 使用示例
+val cooldownManager = CooldownManager()
+
+// 设置冷却时间
+cooldownManager.setCooldown("player1.ability1", "30s")
+cooldownManager.setCooldown("player2.ability1", "1m")
+cooldownManager.setCooldown("global.event", "1d")
+
+// 检查是否在冷却中
+if (cooldownManager.isOnCooldown("player1.ability1")) {
+    val remaining = cooldownManager.formatRemainingTime("player1.ability1")
+    println("技能冷却中，剩余时间: $remaining")
+} else {
+    println("技能可以使用")
+    // 使用技能后重新设置冷却
+    cooldownManager.setCooldown("player1.ability1", "30s")
+}
+```
+
+:::tip
+
+本文由 Claude 3.7 生成。
+
+:::

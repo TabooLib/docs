@@ -1,0 +1,445 @@
+---
+id: game-tools
+title: Game Tools
+sidebar_label: Game Tools
+---
+
+# 游戏工具
+
+common-legacy-api 模块提供了一系列游戏相关的工具，包括冷却系统、经验等级处理、物品描述映射等功能。
+
+## Baffle
+
+:::warning
+
+**注意**：`Baffle` 是一个过时的工具类。它在内部使用 `ConcurrentHashMap` 存储数据，但没有提供自动清理机制。**必须在玩家离开游戏时调用 `reset(playerId)` 方法来释放缓存**，否则会导致内存泄漏。在新项目中，建议使用其他更现代的冷却系统实现。
+
+:::
+
+`Baffle` 是一个冷却工具，可以用于控制操作的频率。它支持基于时间和基于次数的两种冷却方式。
+
+### 基于时间的冷却
+
+```java
+// 创建基于时间的冷却器（5秒）
+Baffle timeBaffle = Baffle.of(5, TimeUnit.SECONDS);
+
+// 检查是否可以执行操作
+if (timeBaffle.hasNext("player1")) {
+    // 可以执行操作
+    System.out.println("Action executed for player1");
+}
+
+// 检查是否可以执行操作，但不更新冷却时间
+boolean canExecute = timeBaffle.hasNext("player1", false);
+
+// 获取下次执行时间（毫秒）
+long nextTime = ((Baffle.BaffleTime) timeBaffle).nextTime("player1");
+
+// 重置冷却
+timeBaffle.reset("player1");
+
+// 强制更新数据（开始冷却）
+timeBaffle.next("player1");
+```
+
+### 基于次数的冷却
+
+```java
+// 创建基于次数的冷却器（3次）
+Baffle countBaffle = Baffle.of(3);
+
+// 检查是否可以执行操作
+// 注意：对于基于次数的冷却器，hasNext 返回 false 表示还可以执行，返回 true 表示已达到次数限制
+if (!countBaffle.hasNext("player1")) {
+    // 可以执行操作（未达到次数限制）
+    System.out.println("Action executed for player1");
+}
+
+// 检查是否可以执行操作，但不更新计数
+boolean reachedLimit = countBaffle.hasNext("player1", false);
+
+// 重置计数
+countBaffle.reset("player1");
+
+// 增加计数
+countBaffle.next("player1");
+```
+
+### 全局冷却
+
+```java
+// 使用 "*" 作为 ID 可以设置全局冷却
+Baffle globalBaffle = Baffle.of(10, TimeUnit.SECONDS);
+
+// 检查全局冷却
+if (globalBaffle.hasNext()) {
+    // 全局冷却已过，可以执行操作
+    System.out.println("Global action executed");
+}
+
+// 重置全局冷却
+globalBaffle.reset();
+
+// 开始全局冷却
+globalBaffle.next();
+```
+
+### 内存泄漏问题及解决方案
+
+由于 `Baffle` 内部使用 `ConcurrentHashMap` 存储数据，但没有提供自动清理机制，因此需要手动管理内存：
+
+```java
+// 在玩家退出游戏时释放缓存
+@SubscribeEvent
+public void onPlayerQuit(PlayerQuitEvent event) {
+    String playerId = event.getPlayer().getName();
+    
+    // 释放所有使用该玩家ID的冷却缓存
+    skillCooldown.reset(playerId);
+    itemCooldown.reset(playerId);
+    commandCooldown.reset(playerId);
+}
+
+// 或者在插件卸载时释放所有缓存
+@Override
+public void onDisable() {
+    skillCooldown.resetAll();
+    itemCooldown.resetAll();
+    commandCooldown.resetAll();
+}
+```
+
+### 实际应用示例
+
+```java
+// 技能冷却系统
+class SkillCooldownManager {
+    private final Map<String, Baffle> skillCooldowns = new HashMap<>();
+    
+    public void registerSkill(String skillId, long cooldownSeconds) {
+        skillCooldowns.put(skillId, Baffle.of(cooldownSeconds, TimeUnit.SECONDS));
+    }
+    
+    public boolean canUseSkill(String playerId, String skillId) {
+        Baffle cooldown = skillCooldowns.get(skillId);
+        if (cooldown == null) {
+            return true;
+        }
+        
+        return cooldown.hasNext(playerId);
+    }
+    
+    public void useSkill(String playerId, String skillId) {
+        Baffle cooldown = skillCooldowns.get(skillId);
+        if (cooldown != null) {
+            cooldown.next(playerId);
+        }
+    }
+    
+    public long getNextUseTime(String playerId, String skillId) {
+        Baffle cooldown = skillCooldowns.get(skillId);
+        if (cooldown instanceof Baffle.BaffleTime) {
+            return ((Baffle.BaffleTime) cooldown).nextTime(playerId);
+        }
+        return 0;
+    }
+    
+    // 清理玩家数据
+    public void cleanupPlayer(String playerId) {
+        skillCooldowns.values().forEach(baffle -> baffle.reset(playerId));
+    }
+}
+
+// 使用示例
+SkillCooldownManager cooldownManager = new SkillCooldownManager();
+cooldownManager.registerSkill("fireball", 10); // 10秒冷却
+cooldownManager.registerSkill("teleport", 30); // 30秒冷却
+
+// 玩家使用技能
+String playerId = "player1";
+String skillId = "fireball";
+
+if (cooldownManager.canUseSkill(playerId, skillId)) {
+    // 执行技能效果
+    System.out.println("Player used fireball!");
+    
+    // 开始冷却
+    cooldownManager.useSkill(playerId, skillId);
+} else {
+    // 技能在冷却中
+    long nextUseTime = cooldownManager.getNextUseTime(playerId, skillId);
+    System.out.println("Skill on cooldown. Available in " + nextUseTime + "ms");
+}
+
+// 玩家退出时清理数据
+// 在 PlayerQuitEvent 中调用
+cooldownManager.cleanupPlayer(playerId);
+```
+
+## Level
+
+`Level` 是一个经验等级工具，用于处理玩家的经验和等级。它提供了获取和设置玩家经验的方法，以及计算等级和经验之间关系的功能。
+
+### 基本用法
+
+```java
+// 设置玩家的总经验值
+Level.setTotalExperience(player, 1000);
+
+// 获取玩家的总经验值
+int totalExp = Level.getTotalExperience(player);
+
+// 获取玩家距离下一级还需要的经验
+int expUntilNextLevel = Level.getExpUntilNextLevel(player);
+```
+
+### 经验计算
+
+```java
+// 获取指定等级所需的经验值
+int expAtLevel10 = Level.getExpAtLevel(10);
+int expAtLevel20 = Level.getExpAtLevel(20);
+int expAtLevel30 = Level.getExpAtLevel(30);
+
+// 获取达到指定等级所需的总经验值
+int expToLevel10 = Level.getExpToLevel(10);
+int expToLevel20 = Level.getExpToLevel(20);
+int expToLevel30 = Level.getExpToLevel(30);
+```
+
+### 实际应用示例
+
+```java
+// 自定义经验系统
+class CustomExperienceSystem {
+    private final Map<UUID, Integer> playerExp = new HashMap<>();
+    
+    public int getPlayerLevel(UUID playerId) {
+        int exp = playerExp.getOrDefault(playerId, 0);
+        int level = 0;
+        
+        while (Level.getExpToLevel(level + 1) <= exp) {
+            level++;
+        }
+        
+        return level;
+    }
+    
+    public int getPlayerExp(UUID playerId) {
+        return playerExp.getOrDefault(playerId, 0);
+    }
+    
+    public void addPlayerExp(UUID playerId, int exp) {
+        int currentExp = playerExp.getOrDefault(playerId, 0);
+        int newExp = currentExp + exp;
+        playerExp.put(playerId, newExp);
+        
+        // 检查是否升级
+        int oldLevel = getPlayerLevel(UUID playerId);
+        int newLevel = getPlayerLevel(UUID playerId);
+        
+        if (newLevel > oldLevel) {
+            // 玩家升级了
+            System.out.println("Player leveled up to " + newLevel);
+        }
+    }
+    
+    public int getExpToNextLevel(UUID playerId) {
+        int currentExp = playerExp.getOrDefault(playerId, 0);
+        int currentLevel = getPlayerLevel(playerId);
+        int nextLevelExp = Level.getExpToLevel(currentLevel + 1);
+        
+        return nextLevelExp - currentExp;
+    }
+    
+    public void syncWithMinecraft(Player player) {
+        // 将自定义经验系统的经验同步到 Minecraft 原生经验系统
+        int exp = getPlayerExp(player.getUniqueId());
+        Level.setTotalExperience(player, exp);
+    }
+}
+```
+
+## LoreMap
+
+`LoreMap` 是一个用于物品 Lore 前缀识别的工具，可以高效地从物品描述中提取信息。它使用 Trie 树结构来实现高效的前缀匹配。
+
+### 基本用法
+
+```java
+// 创建 LoreMap，默认无视空格和颜色代码，不无视前缀
+LoreMap<String> defaultLoreMap = new LoreMap<>();
+
+// 创建自定义 LoreMap
+// 参数：ignoreSpace（是否无视空格）, ignoreColor（是否无视颜色代码）, ignorePrefix（是否无视前缀）
+LoreMap<String> customLoreMap = new LoreMap<>(true, true, true);
+
+// 添加 Lore 和对应的对象
+customLoreMap.put("物理伤害", "PHYSICAL");
+customLoreMap.put("魔法伤害", "MAGIC");
+customLoreMap.put("真实伤害", "TRUE");
+
+// 获取匹配的对象
+String damageType = customLoreMap.get("§c§l物理伤害: §a20"); // 返回 "PHYSICAL"
+
+// 获取匹配结果（包含剩余部分）
+LoreMap.MatchResult<String> result = customLoreMap.getMatchResult("§c§l物理伤害: §a20");
+if (result != null && result.obj != null) {
+    String type = result.obj; // "PHYSICAL"
+    String remain = result.remain; // ": §a20"
+    
+    // 可以进一步处理剩余部分，例如提取数值
+    String valueStr = remain.replaceAll("§.", "").replaceAll("[^0-9]", "");
+    int value = Integer.parseInt(valueStr); // 20
+}
+```
+
+### 高级用法
+
+```java
+// 创建属性映射
+class AttributeSystem {
+    private final LoreMap<AttributeType> attributeMap = new LoreMap<>(true, true, true);
+    
+    public AttributeSystem() {
+        // 注册属性类型
+        attributeMap.put("物理伤害", AttributeType.PHYSICAL_DAMAGE);
+        attributeMap.put("魔法伤害", AttributeType.MAGIC_DAMAGE);
+        attributeMap.put("真实伤害", AttributeType.TRUE_DAMAGE);
+        attributeMap.put("生命值", AttributeType.HEALTH);
+        attributeMap.put("魔法值", AttributeType.MANA);
+        attributeMap.put("攻击速度", AttributeType.ATTACK_SPEED);
+        attributeMap.put("移动速度", AttributeType.MOVEMENT_SPEED);
+    }
+    
+    public Map<AttributeType, Double> parseItemAttributes(List<String> lore) {
+        Map<AttributeType, Double> attributes = new HashMap<>();
+        
+        for (String line : lore) {
+            LoreMap.MatchResult<AttributeType> result = attributeMap.getMatchResult(line);
+            if (result != null && result.obj != null) {
+                AttributeType type = result.obj;
+                String remain = result.remain;
+                
+                // 提取数值
+                String valueStr = remain.replaceAll("§.", "").replaceAll("[^0-9.-]", "");
+                try {
+                    double value = Double.parseDouble(valueStr);
+                    attributes.put(type, value);
+                } catch (NumberFormatException ignored) {
+                    // 忽略无法解析的数值
+                }
+            }
+        }
+        
+        return attributes;
+    }
+    
+    public enum AttributeType {
+        PHYSICAL_DAMAGE, MAGIC_DAMAGE, TRUE_DAMAGE,
+        HEALTH, MANA, ATTACK_SPEED, MOVEMENT_SPEED
+    }
+}
+
+// 使用示例
+AttributeSystem attributeSystem = new AttributeSystem();
+List<String> itemLore = Arrays.asList(
+    "§b§l[§e§l属性§b§l]",
+    "§c§l物理伤害: §a20",
+    "§d§l魔法伤害: §a15",
+    "§a§l生命值: §a100"
+);
+
+Map<AttributeType, Double> attributes = attributeSystem.parseItemAttributes(itemLore);
+// 结果: {PHYSICAL_DAMAGE=20.0, MAGIC_DAMAGE=15.0, HEALTH=100.0}
+```
+
+## ColorRegex
+
+`ColorRegex` 是一个用于处理带颜色代码的字符串匹配的工具。它可以创建忽略颜色代码的正则表达式，用于匹配带颜色代码的字符串。
+
+### 基本用法
+
+```java
+// 创建忽略颜色代码的正则表达式
+Pattern pattern = ColorRegex.patternIgnoreColor("物理伤害");
+
+// 匹配带颜色代码的字符串
+Matcher matcher = pattern.matcher("§c§l物理§a伤§b害");
+if (matcher.find()) {
+    // 匹配成功
+    System.out.println("匹配成功");
+}
+
+// 将字符串转换为正则表达式，忽略颜色代码
+String regex = ColorRegex.stringToRegexIgnoreColor("物理伤害");
+System.out.println(regex); // 输出: (?:§.)*物(?:§.)*理(?:§.)*伤(?:§.)*害
+
+// 将普通字符串转换为正则表达式（不忽略颜色代码）
+String plainRegex = ColorRegex.stringToRegex("物理伤害");
+System.out.println(plainRegex); // 输出: 物理伤害（特殊字符会被转义）
+
+// 将字符串转换为正则表达式，并在每个字符前插入分隔符
+String regexWithDelimiter = ColorRegex.stringToRegex("物理伤害", "(?:\\s*)", false);
+System.out.println(regexWithDelimiter); // 输出: (?:\s*)物(?:\s*)理(?:\s*)伤(?:\s*)害
+```
+
+### 实际应用示例
+
+```java
+// Lore 替换系统
+class LoreReplacer {
+    private final Map<Pattern, String> replacements = new HashMap<>();
+    
+    public void addReplacement(String from, String to) {
+        // 创建忽略颜色代码的正则表达式
+        Pattern pattern = ColorRegex.patternIgnoreColor(from);
+        replacements.put(pattern, to);
+    }
+    
+    public String processLore(String lore) {
+        String result = lore;
+        for (Map.Entry<Pattern, String> entry : replacements.entrySet()) {
+            Pattern pattern = entry.getKey();
+            String replacement = entry.getValue();
+            
+            // 替换匹配的文本
+            result = pattern.matcher(result).replaceAll(replacement);
+        }
+        return result;
+    }
+    
+    public List<String> processLore(List<String> lore) {
+        return lore.stream()
+            .map(this::processLore)
+            .collect(Collectors.toList());
+    }
+}
+
+// 使用示例
+LoreReplacer replacer = new LoreReplacer();
+replacer.addReplacement("物理伤害", "§c物理伤害");
+replacer.addReplacement("魔法伤害", "§d魔法伤害");
+replacer.addReplacement("生命值", "§a生命值");
+
+List<String> originalLore = Arrays.asList(
+    "§b§l[§e§l属性§b§l]",
+    "§l物理伤害: §a20",
+    "§l魔法伤害: §a15",
+    "§l生命值: §a100"
+);
+
+List<String> processedLore = replacer.processLore(originalLore);
+// 结果:
+// §b§l[§e§l属性§b§l]
+// §l§c物理伤害: §a20
+// §l§d魔法伤害: §a15
+// §l§a生命值: §a100
+```
+
+:::tip
+
+本文由 Claude 3.7 生成。
+
+:::
