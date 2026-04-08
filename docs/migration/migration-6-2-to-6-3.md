@@ -54,7 +54,13 @@ nmsClass("core.registries.BuiltInRegistries")
 
 :::tip
 
-建议这里的类名改为使用 Mojang Mapping，否则**无法直接兼容**不再混淆的服务端。
+建议这里的类名改为使用 Mojang 译名，否则**无法直接兼容**不再混淆的服务端。
+
+:::
+
+:::tip
+
+在 26.1 以前，会自动截取最后一个 **点** 以后的类名，也就是说在旧版本，`nmsClass("core.registries.BuiltInRegistries")` 与 `nmsClass("BuiltInRegistries")` 等价。
 
 :::
 
