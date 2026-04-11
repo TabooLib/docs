@@ -64,7 +64,7 @@ nmsClass("core.registries.BuiltInRegistries")
 
 :::
 
-## 新增或重新编写 nmsProxy 实现
+## 4. 新增或重新编写 nmsProxy 实现
 
 如果您的项目中使用到了 `nmsProxy` 代理，在 26.1 后，需要重新使用 Mojang Mapping 编写适用于 26.1 以上的 nms 实现。
 
@@ -76,7 +76,7 @@ nmsClass("core.registries.BuiltInRegistries")
 
 :::
 
-## 调整数据包名称判断逻辑
+## 5. 调整数据包名称判断逻辑
 
 如果您的项目中使用到了数据包功能，并判断了数据包名称，例如：
 
