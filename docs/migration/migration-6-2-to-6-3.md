@@ -22,9 +22,9 @@ sidebar_position: 3
 
 **这个版本主要有哪些改动？**
 
-TabooLib 转译 nmsProxy 实现时，如果遇到使用 Mojang 译名编写的代码，并且当前服务端环境使用的又是 Spigot Mapping 时（通常表现为 Paper 1.20.6- 或 Spigot 1.21.11-），则会将 Spigot 译名转换为 Mojang 译名，例如：
+从 `6.3` 开始，TabooLib 转译 nmsProxy 实现时，如果遇到使用 Mojang 译名编写的代码，并且当前服务端环境使用的又是 Spigot Mapping 时（通常表现为 Paper 1.20.6- 或 Spigot 1.21.11-），则会将 Mojang 译名转换为适配当前环境的 Spigot 译名，例如：
 
-- `net.minecraft.network.protocol.game.PacketPlayOutOpenWindowMerchant` **->** `net.minecraft.network.protocol.game.ClientboundMerchantOffersPacket`
+- `net.minecraft.network.protocol.game.ClientboundMerchantOffersPacket` **->** `net.minecraft.network.protocol.game.PacketPlayOutOpenWindowMerchant`
 
 **哪些 API 受到了破坏性的影响？**
 
